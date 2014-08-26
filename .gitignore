@@ -1,0 +1,6 @@
+.*
+*.sln
+*.suo
+Prism
+Source/bin
+Source/obj
