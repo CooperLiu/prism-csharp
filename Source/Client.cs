@@ -10,12 +10,20 @@ namespace Prism
 {
     public class PrismClient
     {
-
+        //应用的Key
         public string Key;
+
+        //api 服务器 e.g. http://example.com/api
         public string Server;
-        public int Timeout;
-        public bool KeepAlive;
-        public OAuth OauthInfo;
+
+        //超时时间，默认5000
+        public int Timeout = 5000;
+
+        //是否为长连接，默认为真
+        public bool KeepAlive = true;
+
+
+        //key对应的secret
         private string secret;
 
         public PrismClient(string server, string key, string secret)
@@ -23,52 +31,62 @@ namespace Prism
             this.Key = key;
             this.Server = server;
             this.secret = secret;
-            this.Timeout = 5000;
-            this.KeepAlive = true;
         }
 
-        public HttpWebRequest request(string uri)
+        //生成HttpWebRequest实例
+        private HttpWebRequest CreateRequest(string uri)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             request.KeepAlive = this.KeepAlive;
             request.UserAgent = this.UserAgent(); 
-            request.Timeout = this.Timeout;
+            request.Timeout = this.Timeout; 
             return request;
         }
 
+        //用户代理
         public string UserAgent()
         {
             return "Prism/dotNet"; 
         }
 
+        //处理get请求
         public PrismResponse Get(string api, PrismParams parameters)
         {
             return this.action("GET", api, parameters);
         }
 
+        //处理post请求
         public PrismResponse Post(string api, PrismParams parameters)
         {
             return this.action("POST", api, parameters);
         }
 
+        //RequireOAuth 获取认证凭据
+        //e.g.
+        //{
+        //    "access_token": "xxx",
+        //    "data": {
+        //    "@id": "000000",
+        //    "login": "xxx",
+        //    "email": "xxx@xxx.com",
+        //    "firstname": "xxx",
+        //    "lastname": "xxx"
+        //    },
+        //    "expires_in": xxx,
+        //    "refresh_expires": xxx,
+        //    "refresh_token": "xxx",
+        //    "session_id": "xxx"
+        //}
+        //param: code 字符串 token提取码 跳转验证登录后返回
+        //retrun: PrismResponse实例
         public PrismResponse RequireOAuth(string code)
         {
             PrismParams parameters = new PrismParams { };
             parameters.Add("code", code);
             parameters.Add("grant_type", "authorization_code");
 
-            try
-            {
-                PrismResponse response = this.Post("oauth/token", parameters);
-                Debug.WriteLine(response);
-                return response;
-            }
-            catch (PrismException e)
-            {
-
-                throw e;
-            }
-         
+            PrismResponse response = this.Post("oauth/token", parameters);
+            return response;
         }
 
         private PrismResponse action(string method, string api, PrismParams parameters)
@@ -97,13 +115,11 @@ namespace Prism
 
                 this.FixParams(method, uri.AbsolutePath, parameters, headers, getParams, postParams);
 
-              
-
                 if (use_query_in_uri)
                 {
                     uristr = uristr + "?" + getParams.ToString();
                 }
-                HttpWebRequest request = this.request(uristr);
+                HttpWebRequest request = this.CreateRequest(uristr);
 
                 request.Method = method;
 
