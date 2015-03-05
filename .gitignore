@@ -7,4 +7,4 @@ Source/obj
 Build/*
 TestResults/*
 *.user
-packages/*
+Source/packages/*
