@@ -5,3 +5,5 @@ Prism
 Source/bin
 Source/obj
 Build/*
+TestResults/*
+*.user
