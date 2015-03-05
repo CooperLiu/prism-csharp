@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Net;
 using System.IO;
@@ -14,7 +15,7 @@ namespace Prism
         public string Server;
         public int Timeout;
         public bool KeepAlive;
-        public string OAuthToken;
+        public OAuth OauthInfo;
         private string secret;
 
         public PrismClient(string server, string key, string secret)
@@ -50,6 +51,26 @@ namespace Prism
             return this.action("POST", api, parameters);
         }
 
+        public PrismResponse RequireOAuth(string code)
+        {
+            PrismParams parameters = new PrismParams { };
+            parameters.Add("code", code);
+            parameters.Add("grant_type", "authorization_code");
+
+            try
+            {
+                PrismResponse response = this.Post("oauth/token", parameters);
+                Debug.WriteLine(response);
+                return response;
+            }
+            catch (PrismException e)
+            {
+
+                throw e;
+            }
+         
+        }
+
         private PrismResponse action(string method, string api, PrismParams parameters)
         {
             try
@@ -58,7 +79,6 @@ namespace Prism
                 PrismParams getParams = new PrismParams { };
                 PrismParams postParams = new PrismParams { };
                 string uristr = this.Server + "/" + api;
-
                 Uri uri = new Uri(uristr);
 
                 bool use_query_in_uri = false;
@@ -77,11 +97,14 @@ namespace Prism
 
                 this.FixParams(method, uri.AbsolutePath, parameters, headers, getParams, postParams);
 
+              
+
                 if (use_query_in_uri)
                 {
                     uristr = uristr + "?" + getParams.ToString();
                 }
                 HttpWebRequest request = this.request(uristr);
+
                 request.Method = method;
 
                 if (use_query_in_uri == false)
@@ -89,6 +112,7 @@ namespace Prism
                     byte[] postData = postParams.ToBytes();
                     request.ContentLength = postData.Length;
                     request.ContentType = "application/x-www-form-urlencoded";
+
                     using (var dataStream = request.GetRequestStream())
                     {
                         dataStream.Write(postData, 0, postData.Length);
@@ -108,7 +132,7 @@ namespace Prism
                 }
                 catch (PrismException)
                 {
-                    throw;
+                    throw e;
                 }
                 catch
                 {
@@ -121,7 +145,7 @@ namespace Prism
             }
         }
 
-
+        //添加签名
         public void FixParams(string method, string path, PrismParams parameters
             , PrismParams headers, PrismParams getParams, PrismParams postParams)
         {

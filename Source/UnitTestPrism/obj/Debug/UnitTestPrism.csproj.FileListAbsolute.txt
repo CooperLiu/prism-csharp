@@ -1,0 +1,9 @@
+D:\c#\prism-csharp\Source\UnitTestPrism\bin\Debug\UnitTestPrism.dll
+D:\c#\prism-csharp\Source\UnitTestPrism\bin\Debug\UnitTestPrism.pdb
+D:\c#\prism-csharp\Source\UnitTestPrism\obj\Debug\UnitTestPrism.csprojResolveAssemblyReference.cache
+D:\c#\prism-csharp\Source\UnitTestPrism\obj\Debug\UnitTestPrism.dll
+D:\c#\prism-csharp\Source\UnitTestPrism\obj\Debug\UnitTestPrism.pdb
+D:\c#\prism-csharp\Source\UnitTestPrism\bin\Debug\Prism.dll
+D:\c#\prism-csharp\Source\UnitTestPrism\bin\Debug\Prism.pdb
+D:\c#\prism-csharp\Source\UnitTestPrism\obj\Debug\UnitTestPrism.Properties.Resources.resources
+D:\c#\prism-csharp\Source\UnitTestPrism\obj\Debug\UnitTestPrism.csproj.GenerateResource.Cache
