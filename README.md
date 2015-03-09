@@ -2,8 +2,8 @@
 
 Deps framework 2.0
 
+依赖第三方模块
 PM> Install-Package WebSocket4Net -Version 0.11.0
-pM> Install-Package Newtonsoft.Json -Version 6.0.8
 
 ## Usage:
 

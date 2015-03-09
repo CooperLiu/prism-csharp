@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Text;
 using System.Web;
 
-namespace Prism.PrismClient
+namespace Prism.Client
 {
     public class PrismParams : NameValueCollection
     {

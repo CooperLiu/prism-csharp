@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 
-namespace Prism.PrismClient
+namespace Prism.Client
 {
     class PrismException : System.Exception
     {

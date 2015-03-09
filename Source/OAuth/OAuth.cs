@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Prism.PrismClient;
+using Prism.Client;
 
-namespace Prism.PrismOAuth
+namespace Prism.OAuth
 {
-    public class OAuth
+    public class PrismOAuth
     {
-        private Client _client;
+        private PrismClient _client;
 
 
-        public OAuth(Client client)
+        public PrismOAuth(PrismClient client)
         {
             this._client = client;
         }

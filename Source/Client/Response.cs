@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.Net;
 
-namespace Prism.PrismClient
+namespace Prism.Client
 {
     public class PrismResponse
     {

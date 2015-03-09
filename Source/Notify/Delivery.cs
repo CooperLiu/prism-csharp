@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Prism.PrismNotify
+namespace Prism.Notify
 {
     //消息内容
-    public class Delivery
+    public class PrismDelivery
     {
         public string Key;
         public string App;

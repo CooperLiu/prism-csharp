@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Prism.PrismClient;
-using Prism.PrismNotify;
-using Prism.PrismOAuth;
+using Prism.Client;
+using Prism.Notify;
+using Prism.OAuth;
 
 namespace Prism
 {
-    public class Prism
+    public class PrismDotNet
     {
         private string _key;
         private string _host;
         private string _secret;
 
-        public Client Client;
-        public OAuth OAuth;
-        public Notify Notify;
+        public PrismClient Client;
+        public PrismOAuth OAuth;
+        public PrismNotify Notify;
 
         
         public const string UserAgent = "Prism/dotNet";
@@ -26,14 +26,14 @@ namespace Prism
         /// <param name="host">服务器</param>
         /// <param name="key">应用的Key</param>
         /// <param name="secret">应用的Secret</param>
-        public Prism(string host, string key, string secret)
+        public PrismDotNet(string host, string key, string secret)
         {
             this._key = key;
             this._host = host;
             this._secret = secret;
-            this.Client = new Client(host, key, secret, UserAgent);
-            this.OAuth = new OAuth(this.Client);
-            this.Notify = new Notify(this.Client.OAuthToken, UserAgent, host);
+            this.Client = new PrismClient(host, key, secret, UserAgent);
+            this.OAuth = new PrismOAuth(this.Client);
+            this.Notify = new PrismNotify(this.Client.OAuthToken, UserAgent, host);
         }
 
     }

@@ -6,9 +6,9 @@ using System.Net;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace Prism.PrismClient
+namespace Prism.Client
 {
-    public class Client
+    public class PrismClient
     {
         //应用的Key
         public string Key;
@@ -30,7 +30,7 @@ namespace Prism.PrismClient
         //key对应的secret
         private string _secret;
 
-        public Client(string server, string key, string secret, string userAgent)
+        public PrismClient(string server, string key, string secret, string userAgent)
         {
             this.Key = key;
             this.Server = server;
@@ -45,14 +45,12 @@ namespace Prism.PrismClient
             request.KeepAlive = this.KeepAlive;
             request.UserAgent = this.UserAgent; 
             request.Timeout = this.Timeout;
+            request.UserAgent = this.UserAgent;
 
-            WebHeaderCollection headers = new WebHeaderCollection();
-            headers.Add(HttpRequestHeader.UserAgent, this.UserAgent);
             if (this.OAuthToken != null)
             {
-                headers.Add("Authorization", "Bearer " + this.OAuthToken);
+                request.Headers.Add("Authorization", "Bearer " + this.OAuthToken);
             }
-            request.Headers = headers;
 
             return request;
         }

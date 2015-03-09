@@ -7,10 +7,10 @@ using System.IO;
 
 
 
-namespace Prism.PrismNotify
+namespace Prism.Notify
 {
     //websockets 消息系统
-    public class Notify
+    public class PrismNotify
     {
         
 
@@ -33,8 +33,8 @@ namespace Prism.PrismNotify
 
         public class GetDeliveryEventArgs : EventArgs
         {
-            public readonly Delivery Deli;
-            public GetDeliveryEventArgs(Delivery delivery)
+            public readonly PrismDelivery Deli;
+            public GetDeliveryEventArgs(PrismDelivery delivery)
             {
                 this.Deli = delivery;
             }
@@ -48,19 +48,19 @@ namespace Prism.PrismNotify
         /// <summary>
         /// 消息对象
         /// </summary>
-        public Delivery Deli;
+        public PrismDelivery Deli;
 
         public const byte COMMAND_PUBLISH = 0x01;
         public const byte COMMAND_CONSUME = 0x02;
         public const byte COMMAND_ACK = 0x03;
 
-        public Notify(string notifyServer)
+        public PrismNotify(string notifyServer)
             :this(null, null, notifyServer)
         {
             
         }
 
-        public Notify(string token, string userAgent, string notifyServer)
+        public PrismNotify(string token, string userAgent, string notifyServer)
         {
             this._token = token;
             this._userAgent = userAgent;
@@ -179,7 +179,7 @@ namespace Prism.PrismNotify
             Debug.WriteLine(e.Message);
             try
             {
-                Delivery delivery = Newtonsoft.Json.JsonConvert.DeserializeObject<Delivery>(e.Message);
+                PrismDelivery delivery = Newtonsoft.Json.JsonConvert.DeserializeObject<PrismDelivery>(e.Message);
 
                 GetDeliveryEventArgs args = new GetDeliveryEventArgs(delivery);
 
