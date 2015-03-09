@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Prism;
+using System.Net;
 namespace UnitTestPrism
 {
     [TestClass]
@@ -10,9 +12,9 @@ namespace UnitTestPrism
         [TestMethod]
         public void TestOAuth()
         {
-            PrismClient c = new PrismClient("http://192.168.51.50:8080", "pufy2a7d", "skqovukpk2nmdrljphgj");
-            PrismResponse response = c.RequireOAuth("3jgbpy23wesywnemalmo");
-            Debug.WriteLine(response);
+            /*
+             * 测试
+             */
         }
     }
 }
