@@ -95,7 +95,7 @@ namespace Prism.Client
 
                 this.FixParams(method, uri.AbsolutePath, parameters, headers, getParams, postParams);
 
-                if (method == "GET")
+                if (use_query_in_uri)
                 {
                     uristr = uristr + "?" + getParams.ToString();
                 }
