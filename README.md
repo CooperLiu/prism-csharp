@@ -55,7 +55,7 @@ public void OnGetDelivery(object sender, PrismNotify.GetDeliveryEventArgs e)
 prism.Notify().GetDelivery += OnGetDelivery;
 
 /// 推送一条消息
-/// routingKey = "va" or "vb" or "vc"
+/// routingKey 队列标示
 /// message 需要发送的信息
 prism.Notify().Publish(routingKey, message)
 

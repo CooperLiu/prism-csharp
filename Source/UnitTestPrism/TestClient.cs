@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Prism;
 using System.Net;
+using Prism.Client;
 using Prism.Notify;
 
 namespace UnitTestPrism
@@ -28,10 +29,20 @@ namespace UnitTestPrism
             string key = "pufy2a7d";
             string secret = "skqovukpk2nmdrljphgj";
 
-            PrismDotNet p = new PrismDotNet(host, key, secret);
-            p.Notify().GetDelivery += OnGetDelivery;
+            PrismDotNet prism = new PrismDotNet(host, key, secret);
+            prism.Notify().GetDelivery += OnGetDelivery;
 
-            Debug.WriteLine(p.OAuth().OAuthUri("http://www.baidu.com"));
+            PrismParams p = new PrismParams();
+            p["e"] = "va";
+            p["c"] = "va";
+            p["b"] = "vb";
+            p["0"] = "v0";
+
+            PrismResponse rsp = prism.Client().Get("platform/notify/status", p);
+            Console.WriteLine(rsp.RequestId);
+            Console.WriteLine(rsp);
+
+            Debug.WriteLine(prism.OAuth().OAuthUri("http://www.baidu.com"));
         }
     }
 }
