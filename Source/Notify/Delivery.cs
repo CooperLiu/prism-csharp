@@ -7,12 +7,23 @@ namespace Prism.Notify
     //消息内容
     public class PrismDelivery
     {
-        public string Key;
-        public string App;
-        public string RoutingKey;
-        public string ContentType;
-        public object Body;
-        public int Time;
-        public int Tag;
+        public string client_id { get; set; }
+        public string app { get; set; }
+        public string key { get; set; }
+        public string type { get; set; }
+        public object body { get; set; }
+        public int time { get; set; }
+        public int tag { get; set; }
+
+        public PrismDelivery()
+        {
+            this.client_id = "";
+            this.app = "";
+            this.key = "";
+            this.type = "";
+            this.body = null;
+            this.time = -1;
+            this.tag = -1;
+        }
     }
 }

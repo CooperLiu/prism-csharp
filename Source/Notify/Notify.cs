@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using WebSocket4Net;
 using System.IO;
-
+using Prism.Client;
 
 
 namespace Prism.Notify
@@ -17,11 +17,9 @@ namespace Prism.Notify
         
         private WebSocket _webSocket;
 
-        private string _token;
+        private PrismClient _client;
 
-        private string _notifyServer;
-
-        private string _userAgent;
+        private string _uri;
 
         /// <summary>
         /// 获取消息对象后处理的事件
@@ -54,18 +52,10 @@ namespace Prism.Notify
         public const byte COMMAND_CONSUME = 0x02;
         public const byte COMMAND_ACK = 0x03;
 
-        public PrismNotify(string notifyServer)
-            :this(null, null, notifyServer)
+        public PrismNotify(PrismClient client)
         {
-            
-        }
-
-        public PrismNotify(string token, string userAgent, string notifyServer)
-        {
-            this._token = token;
-            this._userAgent = userAgent;
-            this._notifyServer = notifyServer;
-
+            this._client = client;
+            this._uri = client.Server;
             this.CreateWSConn();
            
         }
@@ -77,20 +67,20 @@ namespace Prism.Notify
         {
             List<KeyValuePair<string, string>> header = new List<KeyValuePair<string, string>>();
 
-            if (this._userAgent != null)
+            if (this._client.UserAgent != null)
             {
-                KeyValuePair<string, string> agentHeader = new KeyValuePair<string, string>("User-Agent", this._userAgent);
+                KeyValuePair<string, string> agentHeader = new KeyValuePair<string, string>("User-Agent", this._client.UserAgent);
                 header.Add(agentHeader);
 
             }
-            
-            if (this._token != null)
+
+            if (this._client.OAuthToken != null || this._client.OAuthToken != "")
             {
-                KeyValuePair<string, string> tokenHeader = new KeyValuePair<string, string>("Authorization", "Bearer "+ this._token);
+                KeyValuePair<string, string> tokenHeader = new KeyValuePair<string, string>("Authorization", "Bearer " + this._client.OAuthToken);
                 header.Add(tokenHeader);
             }
 
-            this._webSocket = new WebSocket(this.GetWSAddr(), String.Empty, null, header, this._userAgent, WebSocketVersion.None);
+            this._webSocket = new WebSocket(this.GetWSAddr(), String.Empty, null, header, this._client.UserAgent, WebSocketVersion.None);
 
             this._webSocket.MessageReceived += new EventHandler<MessageReceivedEventArgs>(OnMessage);
         }
@@ -118,20 +108,21 @@ namespace Prism.Notify
         /// <returns></returns>
         public String GetWSAddr()
         {
-            if (this._notifyServer[this._notifyServer.Length - 1] != '/')
+
+            if (this._uri[this._uri.Length - 1] != '/')
             {
-                this._notifyServer += "/";
+                this._uri += "/";
             }
 
-            this._notifyServer.Replace("http://", "ws://");
-            this._notifyServer.Replace("https://", "ws://");
+            this._uri.Replace("http://", "ws://");
+            this._uri.Replace("https://", "ws://");
 
-            if (this._notifyServer.IndexOf("ws://") < 0)
+            if (this._uri.IndexOf("ws://") < 0)
             {
-                this._notifyServer = "ws://" + this._notifyServer;
+                this._uri = "ws://" + this._uri;
             }
 
-            return this._notifyServer + this.PathToNotify;
+            return this._uri + this.PathToNotify;
         }
 
         /// <summary>
