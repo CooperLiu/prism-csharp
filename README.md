@@ -22,7 +22,7 @@ p["c"] = "va";
 p["b"] = "vb";
 p["0"] = "v0";
 
-PrismResponse rsp = prism.Get("platform/notify/status", p);
+PrismResponse rsp = prism.Client().Get("platform/notify/status", p);
 Console.WriteLine(rsp.RequestId);
 Console.WriteLine(rsp);
 
