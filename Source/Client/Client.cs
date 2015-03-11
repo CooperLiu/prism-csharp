@@ -92,7 +92,6 @@ namespace Prism.Client
                         break;
                 }
 
-
                 this.FixParams(method, uri.AbsolutePath, parameters, headers, getParams, postParams);
 
                 if (use_query_in_uri)
@@ -146,6 +145,8 @@ namespace Prism.Client
             , PrismParams headers, PrismParams getParams, PrismParams postParams)
         {
             parameters.Add("client_id", this.Key);
+
+            //http 方法 https方法直接传递 client_secret
             if (true)
             {
                 parameters.Add("sign_time", Convert.ToString(this.timestamp()));
@@ -158,6 +159,15 @@ namespace Prism.Client
             return (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         }
 
+        /// <summary>
+        /// 签名算法
+        /// </summary>
+        /// <param name="url"> /path/to/method</param>
+        /// <param name="header"> urnencode(HeaderKey1 + HeaderValue1 + HeaderKey2 + HeaderValue2 ...)</param>
+        /// <param name="getParams"> urnencode(GetKey1 + GetValue1 + GetKey2 + GetValue2 ...)</param>
+        /// <param name="postParams"> urnencode(PostKey1 + PostValue1 + PostKey2 + PostValue2 ...)</param>
+        /// <param name="method"> GET | POST | DELETE | PUT</param>
+        /// <returns></returns>
         private String Sign(string url, PrismParams header, PrismParams getParams,
             PrismParams postParams, String method)
         {
