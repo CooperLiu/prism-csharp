@@ -42,7 +42,7 @@ string token = prism.OAuth().RequireOAuth(code);
 
 ```
 
-## Notify
+## Notify:
 
 ```
 public void OnGetDelivery(object sender, PrismNotify.GetDeliveryEventArgs e)
