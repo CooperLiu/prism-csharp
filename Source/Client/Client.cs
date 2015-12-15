@@ -92,16 +92,16 @@ namespace Prism.Client
                         break;
                 }
 
-                this.FixParams(method, uri.AbsolutePath, parameters, headers, getParams, postParams);
-
+                
                 if (use_query_in_uri)
                 {
                     uristr = uristr + "?" + getParams.ToString();
                 }
                 HttpWebRequest request = this.CreateRequest(uristr);
-
+                this.FixParams(method, uri.AbsolutePath, parameters, headers, getParams, postParams);
+                
                 request.Method = method;
-
+                
                 if (use_query_in_uri == false)
                 {
                     byte[] postData = postParams.ToBytes();
