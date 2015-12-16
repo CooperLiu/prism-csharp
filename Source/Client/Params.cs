@@ -24,6 +24,26 @@ namespace Prism.Client
             string str = this.ToString();
             return Encoding.ASCII.GetBytes(str);
         }
+        
+        public String headers_str()
+        {
+            List<string> items = new List<string>();
+
+            SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+            foreach (var k in this.AllKeys)
+            {
+                if (k == "Authorization" || k.StartsWith("X-Api-"))
+                {
+                    sort.Add(k, this.Get(k));
+                }
+            }
+
+            foreach (var k in sort.Keys)
+            {
+                items.Add(String.Concat(k, "=", sort[k]));
+            }
+            return String.Join("&", items.ToArray()); 
+        }
 
         public String sort_join(String skip)
         {

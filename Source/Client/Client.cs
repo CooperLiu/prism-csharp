@@ -77,6 +77,8 @@ namespace Prism.Client
                 PrismParams getParams = new PrismParams { };
                 PrismParams postParams = new PrismParams { };
                 string uristr = this.Server + "/" + api;
+                HttpWebRequest request = this.CreateRequest(uristr);
+                
                 Uri uri = new Uri(uristr);
 
                 bool use_query_in_uri = false;
@@ -91,14 +93,21 @@ namespace Prism.Client
                         postParams = parameters;
                         break;
                 }
-
+                
+                
+                foreach (var key in request.Headers.AllKeys)
+                {
+                    headers.Add(key, request.Headers.Get(key));
+                }
+                
+                this.FixParams(method, uri.AbsolutePath, parameters, headers, getParams, postParams);
                 
                 if (use_query_in_uri)
                 {
                     uristr = uristr + "?" + getParams.ToString();
                 }
-                HttpWebRequest request = this.CreateRequest(uristr);
-                this.FixParams(method, uri.AbsolutePath, parameters, headers, getParams, postParams);
+                
+                
                 
                 request.Method = method;
                 
@@ -177,7 +186,7 @@ namespace Prism.Client
             items.Add(this._secret);
             items.Add(method);
             items.Add(PrismParams.Encode(uri_path));
-            items.Add(PrismParams.Encode(header.sort_join("sign")));
+            items.Add(PrismParams.Encode(header.headers_str()));
             items.Add(PrismParams.Encode(getParams.sort_join("sign")));
             items.Add(PrismParams.Encode(postParams.sort_join("sign")));
             items.Add(this._secret);
