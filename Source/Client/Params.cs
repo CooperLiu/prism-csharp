@@ -20,11 +20,12 @@ namespace Prism.Client
             return String.Join("&", items.ToArray());
         }
 
-        public byte[] ToBytes(){
+        public byte[] ToBytes()
+        {
             string str = this.ToString();
             return Encoding.ASCII.GetBytes(str);
         }
-        
+
         public String headers_str()
         {
             List<string> items = new List<string>();
@@ -42,7 +43,7 @@ namespace Prism.Client
             {
                 items.Add(String.Concat(k, "=", sort[k]));
             }
-            return String.Join("&", items.ToArray()); 
+            return String.Join("&", items.ToArray());
         }
 
         public String sort_join(String skip)
@@ -67,6 +68,9 @@ namespace Prism.Client
 
         static public string Encode(string s)
         {
+            if (string.IsNullOrWhiteSpace(s)) {
+                return s;
+            }
             s = HttpUtility.UrlEncode(s, System.Text.Encoding.ASCII);
             s = s.Replace("!", "%21");
             s = s.Replace("*", "%2A");

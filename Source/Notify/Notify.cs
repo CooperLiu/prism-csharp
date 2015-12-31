@@ -80,7 +80,7 @@ namespace Prism.Notify
                 header.Add(tokenHeader);
             }
 
-            this._webSocket = new WebSocket(this.GetWSAddr(), String.Empty, null, header, this._client.UserAgent, WebSocketVersion.None);
+            this._webSocket = new WebSocket(this.GetWSAddr(), String.Empty, null, header, this._client.UserAgent,"",WebSocketVersion.None);
 
             this._webSocket.MessageReceived += new EventHandler<MessageReceivedEventArgs>(OnMessage);
         }

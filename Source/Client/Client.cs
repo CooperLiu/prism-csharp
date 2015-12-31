@@ -43,7 +43,7 @@ namespace Prism.Client
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             request.KeepAlive = this.KeepAlive;
-            request.UserAgent = this.UserAgent; 
+            request.UserAgent = this.UserAgent;
             request.Timeout = this.Timeout;
             request.UserAgent = this.UserAgent;
 
@@ -55,9 +55,9 @@ namespace Prism.Client
             return request;
         }
 
-        
+
         //处理get请求
-        public PrismResponse Get(string api, PrismParams parameters )
+        public PrismResponse Get(string api, PrismParams parameters)
         {
             return this.action("GET", api, parameters);
         }
@@ -68,7 +68,7 @@ namespace Prism.Client
             return this.action("POST", api, parameters);
         }
 
-        
+
         private PrismResponse action(string method, string api, PrismParams parameters)
         {
             try
@@ -78,7 +78,7 @@ namespace Prism.Client
                 PrismParams postParams = new PrismParams { };
                 string uristr = this.Server + "/" + api;
                 HttpWebRequest request = this.CreateRequest(uristr);
-                
+
                 Uri uri = new Uri(uristr);
 
                 bool use_query_in_uri = false;
@@ -93,24 +93,24 @@ namespace Prism.Client
                         postParams = parameters;
                         break;
                 }
-                
-                
+
+
                 foreach (var key in request.Headers.AllKeys)
                 {
                     headers.Add(key, request.Headers.Get(key));
                 }
-                
+
                 this.FixParams(method, uri.AbsolutePath, parameters, headers, getParams, postParams);
-                
+
                 if (use_query_in_uri)
                 {
                     uristr = uristr + "?" + getParams.ToString();
                 }
-                
-                
-                
+
+
+
                 request.Method = method;
-                
+
                 if (use_query_in_uri == false)
                 {
                     byte[] postData = postParams.ToBytes();
