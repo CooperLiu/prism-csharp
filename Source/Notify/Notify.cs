@@ -13,8 +13,6 @@ namespace Prism.Notify
     public class PrismNotify
     {
         
-
-        
         private WebSocket _webSocket;
 
         private PrismClient _client;
@@ -31,7 +29,7 @@ namespace Prism.Notify
 
         public class GetDeliveryEventArgs : EventArgs
         {
-            public readonly PrismDelivery Deli;
+            private readonly PrismDelivery Deli;
             public GetDeliveryEventArgs(PrismDelivery delivery)
             {
                 this.Deli = delivery;

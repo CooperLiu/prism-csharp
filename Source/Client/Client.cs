@@ -59,23 +59,27 @@ namespace Prism.Client
         //处理get请求
         public PrismResponse Get(string api, PrismParams parameters)
         {
-            return this.action("GET", api, parameters);
+            return this.action("GET", api, parameters, new PrismParams());
         }
 
         //处理post请求
-        public PrismResponse Post(string api, PrismParams parameters)
+        public PrismResponse Post(string api, PrismParams postParams, string method = "")
         {
-            return this.action("POST", api, parameters);
+            PrismParams getParams = new PrismParams();
+            if (!string.IsNullOrWhiteSpace(method))
+            {
+                getParams.Add("method", method);
+                api += $"?method={method}";
+            }
+            return this.action("POST", api, getParams, postParams);
         }
 
-
-        private PrismResponse action(string method, string api, PrismParams parameters)
+        private PrismResponse action(string method, string api, PrismParams getParams, PrismParams postParams)
         {
             try
             {
                 PrismParams headers = new PrismParams { };
-                PrismParams getParams = new PrismParams { };
-                PrismParams postParams = new PrismParams { };
+                PrismParams parameters = new PrismParams();
                 string uristr = this.Server + "/" + api;
                 HttpWebRequest request = this.CreateRequest(uristr);
 
@@ -86,11 +90,11 @@ namespace Prism.Client
                 switch (method)
                 {
                     case "GET":
-                        getParams = parameters;
+                        parameters = getParams;
                         use_query_in_uri = true;
                         break;
                     default:
-                        postParams = parameters;
+                        parameters = postParams;
                         break;
                 }
 
@@ -191,6 +195,7 @@ namespace Prism.Client
             items.Add(PrismParams.Encode(postParams.sort_join("sign")));
             items.Add(this._secret);
             string signstr = String.Join("&", items.ToArray());
+            System.Diagnostics.Debug.WriteLine(signstr);
 
             MD5 md5Hash = MD5.Create();
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(signstr));
