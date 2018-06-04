@@ -1,5 +1,20 @@
 # Prism C# sdk
 
+Refact this Sdk, added some features in it.
+
+- Upgraded dotnet framework version from 2.0 to 4.6.1
+- Using HttpClient instead of HttpWebRequest
+- Defined domain object of request parameters
+- Defined request and response base class
+
+
+
+Don't Repeat Yourself, leaving mess apis ,saving your time, enjoy your time.
+
+
+
+
+
 Deps framework 2.0
 
 依赖第三方模块
