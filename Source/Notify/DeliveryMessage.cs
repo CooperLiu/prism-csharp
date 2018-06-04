@@ -10,8 +10,6 @@ namespace Prism.Notify
         public string node_id { get; set; }
         public string order_bn { get; set; }
         public string ship_status { get; set; }
-        public string node_id { get; set; }
-        public string node_id { get; set; }
 
     }
 }

@@ -72,7 +72,7 @@ namespace Prism.Client
             {
                 return s;
             }
-            s = HttpUtility.UrlEncode(s, System.Text.Encoding.ASCII);
+            s = HttpUtility.UrlEncode(s, System.Text.Encoding.UTF8);
             s = s.Replace("!", "%21");
             s = s.Replace("*", "%2A");
             s = s.Replace("+", "%20");

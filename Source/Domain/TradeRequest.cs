@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Prism.Domain
 {
@@ -28,10 +25,10 @@ namespace Prism.Domain
         /// 交易创建时间 格式:yyyy-MM-dd HH:mm:ss 
         /// </summary>
         [Required]
-        public DateTime created { get; set; }
+        public DateTime? created { get; set; }
 
         [Required]
-        public DateTime modified { get; set; }
+        public DateTime? modified { get; set; }
 
         /// <summary>
         /// 交易状态 可 选 值 ： TRADE_ACTIVE: 交易处 理中, TRADE_CLOSED: 交易作废即交易关闭, TRADE_FINISHED: 交易 成功 
@@ -90,9 +87,10 @@ namespace Prism.Domain
         public string orders_discount_fee { get; set; }
 
         /// <summary>
-        /// 详细优惠方案 格式 json
+        /// 详细优惠方案 格式 json: <see cref="PromotionDetail"/>
         /// </summary>
-        public List<PromotionDetail> promotion_details { get; set; }
+        [JsonFormat]
+        public PromotionDetailWrap promotion_details { get; set; }
 
         /// <summary>
         /// 已支付金额 
@@ -130,7 +128,8 @@ namespace Prism.Domain
         public string shipping_tid { get; set; }
 
         /// <summary>
-        /// 交易物流方式名称        /// </summary>
+        /// 交易物流方式名称
+        /// </summary>
         public string shipping_type { get; set; }
 
         /// <summary>
@@ -144,7 +143,8 @@ namespace Prism.Domain
         public string is_protect { get; set; }
 
         /// <summary>
-        /// 保价费用（针对物流配送)
+        /// 保价费用（针对物流配送)
+
         /// </summary>
         public string protect_fee { get; set; }
 
@@ -154,27 +154,28 @@ namespace Prism.Domain
         public string payment_tid { get; set; }
 
         /// <summary>
-        /// 支付方式名称        /// </summary>
+        /// 支付方式名称
+        /// </summary>
         public string payment_type { get; set; }
         /// <summary>
         /// 支付时间。 格式:yyyy-MM-dd HH:mm:ss
         /// </summary>
-        public DateTime pay_time { get; set; }
+        public DateTime? pay_time { get; set; }
 
         /// <summary>
         /// 交易成功时间        格 式 :yyyy-MM-dd        HH:mm:ss
         /// </summary>
-        public DateTime end_time { get; set; }
+        public DateTime? end_time { get; set; }
 
         /// <summary>
         /// 卖家发货时间        格 式 :yyyy-MM-dd        HH:mm:ss
         /// </summary>
-        public DateTime consign_time { get; set; }
+        public DateTime? consign_time { get; set; }
 
         /// <summary>
         /// 交易有效时间(下单后 的最后付款的截止时间)格 式 :yyyy-MM-dd HH:mm:ss
         /// </summary>
-        public DateTime trade_valid_time { get; set; }
+        public DateTime? trade_valid_time { get; set; }
 
         /// <summary>
         /// 收货人的姓名
@@ -187,7 +188,8 @@ namespace Prism.Domain
         public string receiver_email { get; set; }
 
         /// <summary>
-        /// 收货人的所在省份        /// </summary>
+        /// 收货人的所在省份
+        /// </summary>
         public string receiver_state { get; set; }
 
         /// <summary>
@@ -201,7 +203,8 @@ namespace Prism.Domain
         public string receiver_distric { get; set; }
 
         /// <summary>
-        /// 收货人的详细地址        /// </summary>
+        /// 收货人的详细地址
+        /// </summary>
         public string receiver_address { get; set; }
 
         /// <summary>
@@ -235,7 +238,8 @@ namespace Prism.Domain
         public string buyer_id { get; set; }
 
         /// <summary>
-        /// 买家帐号        /// </summary>
+        /// 买家帐号
+        /// </summary>
         public string buyer_uname { get; set; }
 
         /// <summary>
@@ -269,7 +273,8 @@ namespace Prism.Domain
         public string buyer_city { get; set; }
 
         /// <summary>
-        /// 买家的所在地区        /// </summary>
+        /// 买家的所在地区
+        /// </summary>
         public string buyer_district { get; set; }
 
         /// <summary>
@@ -286,6 +291,9 @@ namespace Prism.Domain
         /// </summary>
         public string buyer_rate { get; set; }
 
+        /// <summary>
+        /// 卖家帐号
+        /// </summary>
         public string seller_uname { get; set; }
         public string seller_rate { get; set; }
         public string seller_alipay_no { get; set; }
@@ -335,7 +343,8 @@ namespace Prism.Domain
         public string buyer_memo { get; set; }
 
         /// <summary>
-        /// 买家备注旗帜        /// </summary>
+        /// 买家备注旗帜
+        /// </summary>
         public string buyer_flag { get; set; }
 
         /// <summary>
@@ -354,36 +363,74 @@ namespace Prism.Domain
         public string invoice_desc { get; set; }
 
         /// <summary>
-        /// 当前交易下子订单数量        /// </summary>
+        /// 当前交易下子订单数量
+        /// </summary>
         [Required]
         public string orders_number { get; set; }
 
         /// <summary>
-        /// 该笔交易的商品总重量        /// </summary>
+        /// 该笔交易的商品总重量
+        /// </summary>
         public string total_weight { get; set; }
 
         /// <summary>
         /// 订单
         /// </summary>
         [Required]
-        public List<Order> orders { get; set; }
+        [JsonFormat]
+        public OrderWrap orders { get; set; }
 
         /// <summary>
         /// 支付信息
         /// </summary>
         [Required]
-        public List<PaymentInfo> payment_lists { get; set; }
+        [JsonFormat]
+        public PaymentInfoWrap payment_lists { get; set; }
 
+    }
+
+    public class OrderWrap
+    {
+        public List<Order> order { get; set; }
+    }
+
+    public class PaymentInfoWrap
+    {
+        public List<PaymentInfo> payment_list { get; set; }
     }
 
     public class Order
     {
         public string oid { get; set; }
+
+        /// <summary>
+        /// 订 单 类 型 。 可 选 值 :goods( 商        品),gift(赠品)。默认为 goods
+        /// </summary>
         public string type { get; set; }
+
+        /// <summary>
+        /// 订单类型别名（中文名称）
+        /// </summary>
         public string type_alias { get; set; }
+
+        /// <summary>
+        /// 商品 ID
+        /// </summary>
         public string iid { get; set; }
+
+        /// <summary>
+        /// 标题
+        /// </summary>
         public string title { get; set; }
+
+        /// <summary>
+        /// 订单下商品数量。取值范围:大于零的整数
+        /// </summary>
         public string items_num { get; set; }
+
+        /// <summary>
+        /// 订单金额(单价 x 数量)
+        /// </summary>
         public string total_order_fee { get; set; }
         public string weight { get; set; }
         public string discount_fee { get; set; }
@@ -394,33 +441,39 @@ namespace Prism.Domain
         public string status { get; set; }
 
         /// <summary>
-        /// 发货状态        可 选 值 ： SHIP_NO: 未 发 货 ,SHIP_PREPARE:配货中, SHIP_PART:部分发货, SHIP_FINISH:全部发货,RESHIP_PART: 部 分 退 货,RESHIP_ALL:全部退货
+        /// 发货状态可 选 值 ： SHIP_NO: 未 发 货 ,SHIP_PREPARE:配货中, SHIP_PART:部分发货, SHIP_FINISH:全部发货,RESHIP_PART: 部 分 退 货,RESHIP_ALL:全部退货
         /// </summary>
         public string ship_status { get; set; }
 
         /// <summary>
-        /// 支付状态        可 选 值 ： PAY_NO: 未 付 款 ,PAY_FINISH: 已 付 款 ,PAY_TO_MEDIUM: 付 款 至 担 保 交易 , PAY_PART: 部 分 付 款,REFUND_PART: 部 分 退 款,REFUND_ALL:全额退款
+        /// 支付状态 可 选 值 ： PAY_NO: 未 付 款 ,PAY_FINISH: 已 付 款 ,PAY_TO_MEDIUM: 付 款 至 担 保 交易 , PAY_PART: 部 分 付 款,REFUND_PART: 部 分 退 款,REFUND_ALL:全额退款
         /// </summary>
         public string pay_status { get; set; }
 
         /// <summary>
-        /// 订单发货时间        格式:yyyy-MM-dd HH:mm:ss
+        /// 订单发货时间  格式:yyyy-MM-dd HH:mm:ss
         /// </summary>
-        public DateTime consign_time { get; set; }
+        public string consign_time { get; set; }
 
         /// <summary>
         /// 订单商品详细
         /// </summary>
-        public List<OrderItem> order_items { get; set; }
+        public OrderItemWrap order_items { get; set; }
 
         /// <summary>
-        /// 子订单销售金额        /// </summary>
+        /// 子订单销售金额
+        /// </summary>
         public string sale_price { get; set; }
 
         /// <summary>
         /// 是否超卖，true 超卖；false 正常
         /// </summary>
         public bool is_oversold { get; set; }
+    }
+
+    public class OrderItemWrap
+    {
+        public List<OrderItem> item { get; set; }
     }
 
     public class OrderItem
@@ -436,13 +489,16 @@ namespace Prism.Domain
         public string name { get; set; }
 
         /// <summary>
-        /// 商品的最小库存单位 Sku 的 id        /// </summary>
+        /// 商品的最小库存单位 Sku 的 id
+        /// </summary>
         public string sku_id { get; set; }
         /// <summary>
-        /// SKU 的值。如：机身颜色:黑色;手机套餐:官方标配        /// </summary>
+        /// SKU 的值。如：机身颜色:黑色;手机套餐:官方标配
+        /// </summary>
         public string sku_properties { get; set; }
         /// <summary>
-        /// sku 所属商品 id        /// </summary>
+        /// sku 所属商品 id
+        /// </summary>
         public string iid { get; set; }
         /// <summary>
         /// 重量
@@ -461,7 +517,8 @@ namespace Prism.Domain
         /// </summary>
         public string price { get; set; }
         /// <summary>
-        /// 单价（实付价）        /// </summary>
+        /// 单价（实付价）
+        /// </summary>
         public string sale_price { get; set; }
         /// <summary>
         /// 金额小计
@@ -492,7 +549,8 @@ namespace Prism.Domain
         public string promotion_id { get; set; }
 
         /// <summary>
-        /// 商品优惠金额        /// </summary>
+        /// 商品优惠金额
+        /// </summary>
         public string discount_fee { get; set; }
 
     }
@@ -520,16 +578,19 @@ namespace Prism.Domain
         public string seller_account { get; set; }
 
         /// <summary>
-        /// 买家会员 ID        /// </summary>
+        /// 买家会员 ID
+        /// </summary>
         public string buyer_id { get; set; }
         public string buy_name { get; set; }
 
         /// <summary>
-        /// 买家支付账户        /// </summary>
+        /// 买家支付账户
+        /// </summary>
         public string buyer_account { get; set; }
 
         /// <summary>
-        /// 本次支付金额        /// </summary>
+        /// 本次支付金额
+        /// </summary>
         public string pay_fee { get; set; }
 
         /// <summary>
@@ -543,7 +604,8 @@ namespace Prism.Domain
         public string currency { get; set; }
 
         /// <summary>
-        /// 实际支付金额        /// </summary>
+        /// 实际支付金额
+        /// </summary>
         public string currency_fee { get; set; }
 
         /// <summary>
@@ -557,23 +619,24 @@ namespace Prism.Domain
         public string payment_code { get; set; }
 
         /// <summary>
-        /// 支付方式的名称        /// </summary>
+        /// 支付方式的名称
+        /// </summary>
         public string payment_name { get; set; }
 
         /// <summary>
         /// 开始支付时间        格式：yyyy-MM-dd HH:mm:ss
         /// </summary>
-        public DateTime t_begin { get; set; }
+        public DateTime? t_begin { get; set; }
 
         /// <summary>
         /// 付款结束时间 格式：yyyy-MM-dd HH:mm:ss
         /// </summary>
-        public DateTime t_end { get; set; }
+        public DateTime? t_end { get; set; }
 
         /// <summary>
         /// 支付时间        格式：yyyy-MM-dd HH:mm:ss
         /// </summary>
-        public DateTime pay_time { get; set; }
+        public DateTime? pay_time { get; set; }
 
         /// <summary>
         /// 付款单状态 可选值： SUCC:支付成功, FAILED:支付失败, CANCEL:未支付, ERROR:参数异常 , INVALID: 校 验 错 误,PROGRESS:处理中, TIMEOUT:超时,READY:准备中
@@ -591,6 +654,11 @@ namespace Prism.Domain
         public string outer_no { get; set; }
 
 
+    }
+
+    public class PromotionDetailWrap
+    {
+        public List<PromotionDetail> payment_list { get; set; }
     }
 
     public class PromotionDetail

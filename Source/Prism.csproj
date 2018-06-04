@@ -84,6 +84,8 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Client\PrismParams.cs" />
+    <Compile Include="JsonFormatAttribute.cs" />
+    <Compile Include="NameValueConvertor.cs" />
     <Compile Include="Notify\DeliveryMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

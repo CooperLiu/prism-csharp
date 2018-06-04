@@ -13,12 +13,14 @@ namespace Prism.Domain
         public string node_id { get; set; }
 
         /// <summary>
-        /// 售后申请单 ID        /// </summary>
+        /// 售后申请单 ID
+        /// </summary>
         [Required]
         public string aftersale_id { get; set; }
 
         /// <summary>
-        /// 交易 ID        /// </summary>
+        /// 交易 ID
+        /// </summary>
         [Required]
         public string tid { get; set; }
 
@@ -62,7 +64,8 @@ namespace Prism.Domain
         public LogisticsInfo logistics_info { get; set; }
 
         /// <summary>
-        /// 附件（通常为 url）        /// </summary>
+        /// 附件（通常为 url）
+        /// </summary>
         public string attachment { get; set; }
     }
 

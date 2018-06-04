@@ -6,7 +6,8 @@ namespace Prism.Domain
     public class RefundRequest
     {
         /// <summary>
-        /// 节点号  格 式 :’B2C 节 点号’_’OMS 节点号’        /// </summary>
+        /// 节点号  格 式 :’B2C 节 点号’_’OMS 节点号’
+        /// </summary>
         [Required]
         public string node_id { get; set; }
 
@@ -31,7 +32,8 @@ namespace Prism.Domain
         public string buyer_name { get; set; }
 
         /// <summary>
-        /// 买家（会员）ID        /// </summary>
+        /// 买家（会员）ID
+        /// </summary>
         public string buyer_id { get; set; }
 
         /// <summary>
@@ -40,15 +42,18 @@ namespace Prism.Domain
         public string refund_fee { get; set; }
 
         /// <summary>
-        /// 当前单据选择的货币        类型。可选值：CNY（人        民币），USD（美元），JPY（日元）。- 默认为CNY（人民币）        /// </summary>
+        /// 当前单据选择的货币        类型。可选值：CNY（人        民币），USD（美元），JPY（日元）。- 默认为CNY（人民币）
+        /// </summary>
         public string currency { get; set; }
 
         /// <summary>
-        /// 实际货币金额        /// </summary>
+        /// 实际货币金额
+        /// </summary>
         public string currency_fee { get; set; }
 
         /// <summary>
-        /// 退款类型。可选值：online（在线）, offline（线下）, deposit（预存款）        /// </summary>
+        /// 退款类型。可选值：online（在线）, offline（线下）, deposit（预存款）
+        /// </summary>
         public string pay_type { get; set; }
 
         /// <summary>
@@ -82,7 +87,8 @@ namespace Prism.Domain
         public DateTime t_received { get; set; }
 
         /// <summary>
-        /// 退款单类型:apply(退款申请),refund(已退款)        /// </summary>
+        /// 退款单类型:apply(退款申请),refund(已退款)
+        /// </summary>
         public string refund_type { get; set; }
 
         /// <summary>
@@ -93,7 +99,8 @@ namespace Prism.Domain
         public string memo { get; set; }
 
         /// <summary>
-        /// 支付网关的内部交易单号        /// </summary>
+        /// 支付网关的内部交易单号
+        /// </summary>
         public string outer_no { get; set; }
     }
 }
