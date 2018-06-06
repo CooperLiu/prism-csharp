@@ -7,7 +7,7 @@ namespace Prism.Domain
     /// <summary>
     /// 交易B2C 请求 OMS 的 API [store.trade.add] 创建订单
     /// </summary>
-    public class StoreTradeAddRequest : PrismRequestBase<StoreTradeAddRequestData, StoreTradeAddResponseData>
+    public class StoreTradeAddRequest : PrismRequestBase<StoreTradeAddRequestData, object>
     {
         public override string ApiMethod { get; set; } = "store.trade.add";
     }

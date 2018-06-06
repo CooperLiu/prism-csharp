@@ -154,7 +154,7 @@ namespace Prism.Client
 
                 //fixed 接口不能统一结果
 
-                var json = JToken.Parse(resMsg.UnicodeDecode());
+                var json = JToken.Parse(resMsg);
 
                 var jsonDataValue = json["data"];
                 if (jsonDataValue.ToString() == "\"\"")
