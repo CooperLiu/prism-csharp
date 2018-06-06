@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using Newtonsoft.Json;
 using Prism.Client;
@@ -31,18 +33,68 @@ namespace Prism
                     }
                 }
 
-                if (jsonAttribute != null || pt.IsClass)
+                if (jsonAttribute != null || pt.Namespace.StartsWith("Prism"))
                 {
                     value = $"{JsonConvert.SerializeObject(value)}";
                 }
 
 
-                nv.Add(p.Name, value?.ToString() ?? null);
+                nv.Add(p.Name, value?.ToString() ?? "");
             }
 
             return nv;
         }
 
+        public static TRequest MapTo<TRequest>(NameValueCollection requestData, string timeFormat = "yyyy-MM-dd HH:mm:ss", JsonSerializerSettings settings = null)
+        {
+            var type = typeof(TRequest);
+            var obj = Activator.CreateInstance(type);
 
+            var properties = type.GetProperties();
+
+            foreach (var p in properties)
+            {
+                var jsonAttribute = p.GetCustomAttributes(typeof(JsonFormatAttribute), false).FirstOrDefault();
+
+                var name = p.Name;
+
+                var value = requestData[name];
+
+                var pt = p.PropertyType;
+
+                if (!string.IsNullOrEmpty(value))
+                {
+
+                    if (pt == typeof(DateTime?))
+                    {
+                        var v = DateTime.ParseExact(value, timeFormat, null);
+                        p.SetValue(obj, v);
+                    }
+
+                    if (jsonAttribute != null)
+                    {
+                        var attr = (JsonFormatAttribute)jsonAttribute;
+
+                        if (attr.Type == pt.GetGenericArguments()[0])
+                        {
+                            var list = JsonConvert.DeserializeObject(value, pt);
+                            p.SetValue(obj, list);
+                        }
+                      
+                    }
+                    else
+                    {
+                        var setValue = System.Convert.ChangeType(value, pt);
+
+                        p.SetValue(obj, setValue);
+                    }
+
+
+                }
+
+            }
+
+            return (TRequest)obj;
+        }
     }
 }

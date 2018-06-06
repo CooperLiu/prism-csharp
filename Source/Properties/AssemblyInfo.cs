@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright shopex © 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: InternalsVisibleTo("UnitTestPrism")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型
 // 对 COM 组件不可见。  如果需要从 COM 访问此程序集中的类型，

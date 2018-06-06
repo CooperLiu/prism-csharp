@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 
 namespace Prism.Client
 {
 
-    public class PrismHttpBaseResponse<TData>
+    public class PrismHttpBaseResponse<TReponseData>
     {
         public PrismHttpBaseResponse()
         {
@@ -24,10 +18,10 @@ namespace Prism.Client
         public string Response { get; set; }
 
         [JsonProperty("data")]
-        public TData Data { get; set; }
+        public TReponseData Data { get; set; }
     }
 
-    public class PrismHttpResponse<TData> : PrismHttpBaseResponse<TData>
+    public class PrismHttpResponse<TReponseData> : PrismHttpBaseResponse<TReponseData>
     {
 
         [JsonIgnore]
@@ -38,7 +32,6 @@ namespace Prism.Client
 
         [JsonProperty("result")]
         public string Result { get; set; }
-
 
 
         [JsonProperty("err_msg")]

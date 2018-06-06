@@ -5,10 +5,13 @@ using System.ComponentModel.DataAnnotations;
 namespace Prism.Domain
 {
     /// <summary>
-    /// 售后
+    /// b2c.aftersale.create 添加售后申请单
     /// </summary>
-    public class AfterSaleRequest
+    public class B2cAftersaleCreateRequest
     {
+        // <summary>
+        /// 节点号  格 式 :’B2C 节 点号’_’OMS 节点号’
+        /// </summary>
         [Required]
         public string node_id { get; set; }
 
@@ -16,13 +19,13 @@ namespace Prism.Domain
         /// 售后申请单 ID
         /// </summary>
         [Required]
-        public string aftersale_id { get; set; }
+        public int return_bn { get; set; }
 
         /// <summary>
         /// 交易 ID
         /// </summary>
         [Required]
-        public string tid { get; set; }
+        public int order_bn { get; set; }
 
         /// <summary>
         /// 售后申请标题
@@ -37,49 +40,49 @@ namespace Prism.Domain
         /// <summary>
         /// 申请售后留言
         /// </summary>
-        public string messager { get; set; }
+        public string comment { get; set; }
+
         /// <summary>
         /// 申请时间  格 式 :YYYY-MM-dd HH:mm:ss
         /// </summary>
-        public DateTime created { get; set; }
+        public DateTime add_time { get; set; }
+
+        /// <summary>
+        /// 售后备注
+        /// </summary>
         public string memo { get; set; }
 
         /// <summary>
-        /// 状态 可选值:1(申请中),2(审核中),3(接受申请),4(完 成 ),5(拒 绝 ),6(已 收货 ),7(已质检),8(补 差价),9(已拒绝退款)
+        /// 状态        可选值:1(申请中),2(审        核中),3(接受申请),4(完        成 ),5(拒 绝 ),6(已 收       货 ),7(已质检),8(补 差      价),9(已拒绝退款)
         /// </summary>
         public string status { get; set; }
 
         /// <summary>
-        /// 会员（买家）ID
-        /// </summary>
-        public string buyer_id { get; set; }
+        /// 会员（买家）ID        /// </summary>
+        public string member_id { get; set; }
 
         /// <summary>
-        /// 会员名
+        /// 售后申请明细
         /// </summary>
-        public string buyer_name { get; set; }
-
-        public List<AfterSaleItem> aftersale_items { get; set; }
-
-        public LogisticsInfo logistics_info { get; set; }
+        public AfterSaleItemWrap return_product_items { get; set; }
 
         /// <summary>
         /// 附件（通常为 url）
         /// </summary>
-        public string attachment { get; set; }
+        public string url { get; set; }
+       
+
     }
 
-    public class AfterSaleItem
+    public class AfterSaleItemWrap
     {
-        public string sku_bn { get; set; }
-        public string sku_name { get; set; }
-        public int number { get; set; }
+        public List<AfterSaleItemInfo> AfterSaleItem { get; set; }
     }
 
-    public class LogisticsInfo
+    public class AfterSaleItemInfo
     {
-        public string logistics_company { get; set; }
-
-        public string logistics_no { get; set; }
+        public string bn { get; set; }
+        public string name { get; set; }
+        public string num { get; set; }
     }
 }

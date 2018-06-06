@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Prism.Extensions
 {
@@ -97,6 +98,39 @@ namespace Prism.Extensions
             }
 
             return str + c;
+        }
+
+        /// <summary>
+        /// 字符串URL编码
+        /// </summary>
+        /// <param name="sourceStr"></param>
+        /// <returns></returns>
+        public static string UrlEncode(this string sourceStr)
+        {
+            var str = System.Net.WebUtility.UrlEncode(sourceStr) ?? sourceStr;
+
+            var pattern = @"%\w{2}";
+            var matchArray = Regex.Matches(str, pattern);
+
+            foreach (var match in matchArray)
+            {
+                var matchStr = match.ToString();
+                str = str.Replace(matchStr, matchStr.ToLower());
+            }
+
+            return str;
+        }
+
+        /// <summary>
+        /// 字符串Unicode解码
+        /// </summary>
+        /// <param name="sourceStr"></param>
+        /// <returns></returns>
+        public static string UnicodeDecode(this string sourceStr)
+        {
+            //最直接的方法Regex.Unescape(str);
+            var reg = new Regex(@"(?i)\\[uU]([0-9a-f]{4})");
+            return reg.Replace(sourceStr, m => ((char)Convert.ToInt32(m.Groups[1].Value, 16)).ToString());
         }
     }
 

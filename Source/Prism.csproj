@@ -36,6 +36,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -75,13 +76,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Packages\LibLog.4.2\LibLog.cs" />
+    <Compile Include="Client\PrismCallbackClient.cs" />
     <Compile Include="Client\PrismHttpClient.cs" />
     <Compile Include="Client\PrismHttpResponse.cs" />
-    <Compile Include="Domain\AfterSaleRequest.cs" />
-    <Compile Include="Domain\OrderShipStatusUpdateResponse.cs" />
-    <Compile Include="Domain\RefundRequest.cs" />
-    <Compile Include="Domain\TradeRequest.cs" />
+    <Compile Include="Domain\B2cAftersaleCreateRequest.cs" />
+    <Compile Include="Domain\B2cAftersaleUpdateRequest.cs" />
+    <Compile Include="Domain\B2cOrderLeaveMessageRequest.cs" />
+    <Compile Include="Domain\B2cOrderRemarkRequest.cs" />
+    <Compile Include="Domain\B2cOrderShipStatusUpdateRequest.cs" />
+    <Compile Include="Domain\B2cOrderStatusUpdateRequest.cs" />
+    <Compile Include="Domain\B2cPaymentCreateRequest.cs" />
+    <Compile Include="Domain\B2cRefundCreateRequest.cs" />
+    <Compile Include="Domain\B2cReshipCreateRequest.cs" />
+    <Compile Include="Domain\EctoolsGetPaymentsGetAllRequest.cs" />
+    <Compile Include="Domain\IPrismRequest.cs" />
+    <Compile Include="Domain\StoreTradeAftersaleAddRequest.cs" />
+    <Compile Include="Domain\B2cDeliveryCreateRequest.cs" />
+    <Compile Include="Domain\B2cDeliveryUpdateRequest.cs" />
+    <Compile Include="Domain\ResponseData.cs" />
+    <Compile Include="Domain\StoreTradeRefundRequest.cs" />
+    <Compile Include="Domain\StoreTradeAddRequest.cs" />
+    <Compile Include="Domain\StoreTradeUpdateRequest.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Client\PrismParams.cs" />
     <Compile Include="JsonFormatAttribute.cs" />

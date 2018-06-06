@@ -12,5 +12,11 @@ namespace Prism
         {
         }
 
+        public JsonFormatAttribute(Type type)
+        {
+            Type = type;
+        }
+
+        public Type Type { get; set; }
     }
 }
