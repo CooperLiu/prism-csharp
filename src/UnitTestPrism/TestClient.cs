@@ -276,12 +276,12 @@ namespace UnitTestPrism
             t.end_time = DateTime.Now;
             t.consign_time = DateTime.Now;
             t.trade_valid_time = DateTime.Now;
-            t.receiver_name = "刘先生";
+            t.receiver_name = "王先生";
             t.receiver_email = "";
             t.receiver_state = "上海";
             t.receiver_city = "上海市";
             t.receiver_distric = "长宁区";
-            t.receiver_address = "金钟路968号SOHO2号楼";
+            t.receiver_address = "测试地址";
             t.receiver_zip = "000000";
             t.receiver_mobile = "13688886666";
             t.dreceiver_phone = "13688886666";
@@ -289,7 +289,7 @@ namespace UnitTestPrism
             t.buyer_alipay_no = "alipayNo";
             t.buyer_id = "1213131313";
             t.buyer_uname = "Unknown";
-            t.buyer_name = "刘先生";
+            t.buyer_name = "王先生";
             t.buyer_mobile = "13688886666";
             t.buyer_phone = "";
             t.buyer_email = "";
@@ -367,7 +367,7 @@ namespace UnitTestPrism
             p.tid = t.tid;
             p.seller_account = "313131313";
             p.buyer_id = "1379554443333";
-            p.buy_name = "刘先生";
+            p.buy_name = "王先生";
             p.buyer_account = "1111";
             p.pay_fee = "0.02";
             p.paycost = "0";
