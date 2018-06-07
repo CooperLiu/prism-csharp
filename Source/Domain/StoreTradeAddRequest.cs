@@ -99,7 +99,7 @@ namespace Prism.Domain
         /// <summary>
         /// 详细优惠方案 格式 json: <see cref="PromotionDetail"/>
         /// </summary>
-        [JsonFormat]
+        [JsonFormat(typeof(PromotionDetail))]
         public PromotionDetailWrap promotion_details { get; set; }
 
         /// <summary>
@@ -387,14 +387,14 @@ namespace Prism.Domain
         /// 订单
         /// </summary>
         [Required]
-        [JsonFormat]
+        [JsonFormat(typeof(Order))]
         public OrderWrap orders { get; set; }
 
         /// <summary>
         /// 支付信息
         /// </summary>
         [Required]
-        [JsonFormat]
+        [JsonFormat(typeof(PaymentInfo))]
         public PaymentInfoWrap payment_lists { get; set; }
 
     }

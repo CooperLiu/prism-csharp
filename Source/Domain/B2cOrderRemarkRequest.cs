@@ -7,10 +7,19 @@ using System.Threading.Tasks;
 
 namespace Prism.Domain
 {
+
     /// <summary>
     /// b2c.order.remark 更新订单备注
     /// </summary>
-    public class B2cOrderRemarkRequest
+    public class B2cOrderRemarkRequest : PrismWebhookRequestBase<B2cOrderRemarkRequestData, B2cOrderRemarkResponseData>
+    {
+        public override string ApiMethod { get; set; } = "b2c.order.remark";
+    }
+
+    /// <summary>
+    /// b2c.order.remark 更新订单备注
+    /// </summary>
+    public class B2cOrderRemarkRequestData
     {
         /// <summary>
         /// 节点号 格 式 :’ OMS 节 点号’_’B2C 节点号’
@@ -31,7 +40,8 @@ namespace Prism.Domain
         public string memo { get; set; }
 
         /// <summary>
-        /// 交易备注旗帜  可选值为：0(灰色), 1(红色), 2(黄色), 3(绿色),4(蓝色), 5(粉红色)，7(橙色),8(紫色) 默认 值为 0        /// </summary>
+        /// 交易备注旗帜  可选值为：0(灰色), 1(红色), 2(黄色), 3(绿色),4(蓝色), 5(粉红色)，7(橙色),8(紫色) 默认 值为 0
+        /// </summary>
         [Required]
         public int mark_type { get; set; }
     }

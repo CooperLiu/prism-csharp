@@ -145,6 +145,16 @@ namespace Prism.Domain
         public string pay_type { get; set; }
     }
 
+    public class B2cAftersaleCreateResponseData
+    {
+        public string return_id { get; set; }
+    }
+
+    public class B2cAftersaleUpdateResponseData
+    {
+        public string return_id { get; set; }
+    }
+
 
 
 }

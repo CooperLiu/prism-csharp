@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Prism.Domain
 {
     /// <summary>
     /// b2c.order.ship_status_update 更新发货单状态
     /// </summary>
-    public class B2cOrderShipStatusUpdateRequest
+    public class B2cOrderShipStatusUpdateRequest : PrismWebhookRequestBase<B2cOrderShipStatusUpdateRequestData, B2cOrderShipStatusUpdateResponseData>
+    {
+        public override string ApiMethod { get; set; } = "b2c.order.ship_status_updat";
+    }
+
+    /// <summary>
+    /// b2c.order.ship_status_update 更新发货单状态
+    /// </summary>
+    public class B2cOrderShipStatusUpdateRequestData
     {
         /// <summary>
         /// 节点号 格 式 :’ OMS 节 点号’_’B2C 节点号’

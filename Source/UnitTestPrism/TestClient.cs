@@ -411,8 +411,8 @@ namespace UnitTestPrism
             var jsonStr = "{\"res\": \"\", \"msg_id\": \"5B1786A40AAD2203731D7671C877BA3F\", \"err_msg\": \"\", \"data\": \"{\\\"msg\\\": \\\"\\\\u8fd4\\\\u56de\\\\u503c\\\\uff1a\\\\u8ba2\\\\u5355\\\\u521b\\\\u5efa\\\\u6210\\\\u529f\\\\uff01\\\\u8ba2\\\\u5355ID\\\\uff1a6483\\\", \\\"rsp\\\": \\\"succ\\\", \\\"data\\\": {\\\"tid\\\": \\\"742636638940478205580\\\"}}\", \"rsp\": \"succ\"}";
 
             var j1 = jsonStr.Replace("\"{", "{");
-            var j2 = j1.Replace(@"\\\",@"\");
-            var j3 = j2.Replace(@"\\\\","\\");
+            var j2 = j1.Replace(@"\\\", @"\");
+            var j3 = j2.Replace(@"\\\\", "\\");
 
             var j4 = j3.Replace("}\"", "}");
 
@@ -456,7 +456,7 @@ namespace UnitTestPrism
 
             //System.Diagnostics.Debug.WriteLine(str);
 
-           // var j = jsonDataValue.ToObject<>();
+            // var j = jsonDataValue.ToObject<>();
 
 
 
@@ -465,6 +465,31 @@ namespace UnitTestPrism
             var obj = json.ToObject<PrismHttpResponse<object>>();
 
             Assert.IsNotNull(obj);
+        }
+
+        [TestMethod]
+        public async Task Test_Webhooks()
+        {
+            var method = "ectools.get_payments.get_all";
+            var request = new EctoolsGetPaymentsGetAllRequest();
+            request.Data = new EctoolsGetPaymentsGetAllRequestData()
+            {
+                node_id = "1087196531_1129944230"
+            };
+
+
+            var nv = NameValueConvertor.Convert(request.Data);
+
+
+            string host = "http://ximslkp4.apihub.cn";
+            string key = "quxabf4t";
+            string secret = "2ipua2a6jwslp6cq6fna";
+            var client = new PrismWebhookClient(host, key, secret);
+
+            var res = await client.Handle(request, "POST", "api/Eshop", method, (data) =>
+            {
+                return Task.FromResult(data.Response);
+            });
         }
 
     }

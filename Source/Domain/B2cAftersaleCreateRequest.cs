@@ -4,10 +4,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Prism.Domain
 {
+
     /// <summary>
     /// b2c.aftersale.create 添加售后申请单
     /// </summary>
-    public class B2cAftersaleCreateRequest
+    public class B2cAftersaleCreateRequest:PrismWebhookRequestBase<B2cAftersaleCreateRequestData, B2cAftersaleCreateResponseData>
+    {
+        public override string ApiMethod { get; set; } = "b2c.aftersale.create";
+    }
+
+    /// <summary>
+    /// b2c.aftersale.create 添加售后申请单
+    /// </summary>
+    public class B2cAftersaleCreateRequestData
     {
         // <summary>
         /// 节点号  格 式 :’B2C 节 点号’_’OMS 节点号’
@@ -58,12 +67,14 @@ namespace Prism.Domain
         public string status { get; set; }
 
         /// <summary>
-        /// 会员（买家）ID        /// </summary>
+        /// 会员（买家）ID
+        /// </summary>
         public string member_id { get; set; }
 
         /// <summary>
         /// 售后申请明细
         /// </summary>
+        [JsonFormat(typeof(AfterSaleItemInfo))]
         public AfterSaleItemWrap return_product_items { get; set; }
 
         /// <summary>

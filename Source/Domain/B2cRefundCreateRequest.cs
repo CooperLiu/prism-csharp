@@ -6,18 +6,29 @@ namespace Prism.Domain
     /// <summary>
     /// 添加退款单 b2c.refund.create 
     /// </summary>
-    public class B2cRefundCreateRequest
+    public class B2cRefundCreateRequest : PrismWebhookRequestBase<B2cRefundCreateRequestData, B2cRefundCreateResponseData>
+    {
+        public override string ApiMethod { get; set; } = "b2c.refund.create";
+    }
+
+    /// <summary>
+    /// 添加退款单 b2c.refund.create 
+    /// </summary>
+    public class B2cRefundCreateRequestData
     {
         /// <summary>
-        /// 节点号        格 式 :’ OMS 节 点        号’_’B2C 节点号’        /// </summary>
+        /// 节点号        格 式 :’ OMS 节 点        号’_’B2C 节点号’
+        /// </summary>
         public string node_id { get; set; }
 
         /// <summary>
-        /// 退款单 ID        /// </summary>
+        /// 退款单 ID
+        /// </summary>
         public int refund_bn { get; set; }
 
         /// <summary>
-        /// 交易 ID        /// </summary>
+        /// 交易 ID
+        /// </summary>
         public string order_bn { get; set; }
 
         /// <summary>
@@ -31,7 +42,8 @@ namespace Prism.Domain
         public string account { get; set; }
 
         /// <summary>
-        /// 买家（会员）ID        /// </summary>
+        /// 买家（会员）ID
+        /// </summary>
         public string buyer_id { get; set; }
 
         /// <summary>
@@ -100,7 +112,8 @@ namespace Prism.Domain
         public string memo { get; set; }
 
         /// <summary>
-        /// 支付网关的内部交易单号        /// </summary>
+        /// 支付网关的内部交易单号
+        /// </summary>
         public string trade_no { get; set; }
 
 

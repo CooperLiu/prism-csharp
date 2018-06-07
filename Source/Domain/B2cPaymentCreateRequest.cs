@@ -1,18 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Prism.Domain
 {
     /// <summary>
     /// b2c.payment.create 添加支付单
     /// </summary>
-    public class B2cPaymentCreateRequest
+    public class B2cPaymentCreateRequest : PrismWebhookRequestBase<B2cPaymentCreateRequestData, B2cPaymentCreateResponseData>
+    {
+        public override string ApiMethod { get; set; } = "b2c.payment.create";
+    }
+
+    /// <summary>
+    /// b2c.payment.create 添加支付单
+    /// </summary>
+    public class B2cPaymentCreateRequestData
     {
         /// <summary>
-        /// 节点号        格 式 :’ OMS 节 点        号’_’B2C 节点号’        /// </summary>
+        /// 节点号        格 式 :’ OMS 节 点        号’_’B2C 节点号’
+        /// </summary>
         public string node_id { get; set; }
 
         /// <summary>
@@ -21,7 +26,8 @@ namespace Prism.Domain
         public int payment_bn { get; set; }
 
         /// <summary>
-        /// 交易 ID        /// </summary>
+        /// 交易 ID
+        /// </summary>
         public string order_bn { get; set; }
 
         /// <summary>
@@ -92,7 +98,8 @@ namespace Prism.Domain
         public string memo { get; set; }
 
         /// <summary>
-        /// 支付网关的内部交易单号        /// </summary>
+        /// 支付网关的内部交易单号
+        /// </summary>
         public string trade_no { get; set; }
     }
 }

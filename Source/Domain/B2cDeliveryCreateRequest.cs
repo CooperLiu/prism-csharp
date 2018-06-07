@@ -6,7 +6,15 @@ namespace Prism.Domain
     /// <summary>
     /// b2c.delivery.create 添加发货单
     /// </summary>
-    public class B2cDeliveryCreateRequest
+    public class B2cDeliveryCreateRequest : PrismWebhookRequestBase<B2cDeliveryCreateRequestData, B2cDeliveryCreateResponseData>
+    {
+        public override string ApiMethod { get; set; } = "b2c.delivery.create";
+    }
+
+    /// <summary>
+    /// b2c.delivery.create 添加发货单
+    /// </summary>
+    public class B2cDeliveryCreateRequestData
     {
         /// <summary>
         /// 节点号  格 式 :’ OMS 节 点号’_’B2C 节点号’   
@@ -19,19 +27,23 @@ namespace Prism.Domain
         public int delivery_bn { get; set; }
 
         /// <summary>
-        /// 交易 ID        /// </summary>
+        /// 交易 ID
+        /// </summary>
         public string order_bn { get; set; }
 
         /// <summary>
-        /// 是否保价        可选值:true 保价，false 不保价        /// </summary>
+        /// 是否保价        可选值:true 保价，false 不保价
+        /// </summary>
         public bool is_protect { get; set; }
 
         /// <summary>
-        /// 是否货到付款        /// </summary>
+        /// 是否货到付款
+        /// </summary>
         public bool is_cod { get; set; }
 
         /// <summary>
-        /// 买家（会员）ID        /// </summary>
+        /// 买家（会员）ID
+        /// </summary>
         public string buyer_id { get; set; }
 
         /// <summary>
@@ -127,6 +139,7 @@ namespace Prism.Domain
         /// <summary>
         /// 发货单明细
         /// </summary>
+        [JsonFormat(typeof(ShippingItem))]
         public ShippingItemWrap items { get; set; }
     }
 
@@ -141,7 +154,8 @@ namespace Prism.Domain
     public class ShippingItem
     {
         /// <summary>
-        /// 货品类型  可 选 值 :product(货 品),gift(赠品),adjunct(配件),pkg(捆绑)        /// </summary>
+        /// 货品类型  可 选 值 :product(货 品),gift(赠品),adjunct(配件),pkg(捆绑)
+        /// </summary>
         public string item_type { get; set; }
 
         /// <summary>

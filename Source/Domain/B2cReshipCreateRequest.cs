@@ -3,10 +3,19 @@ using System.Collections.Generic;
 
 namespace Prism.Domain
 {
+
     /// <summary>
     /// b2c.reship.create 添加退货单
     /// </summary>
-    public class B2cReshipCreateRequest
+    public class B2cReshipCreateRequest : PrismWebhookRequestBase<B2cReshipCreateRequestData, B2cReshipCreateResponseData>
+    {
+        public override string ApiMethod { get; set; } = "b2c.reship.create";
+    }
+
+    /// <summary>
+    /// b2c.reship.create 添加退货单
+    /// </summary>
+    public class B2cReshipCreateRequestData
     {
         /// <summary>
         /// 节点号  格 式 :’ OMS 节 点号’_’B2C 节点号’   
@@ -19,19 +28,23 @@ namespace Prism.Domain
         public int delivery_bn { get; set; }
 
         /// <summary>
-        /// 交易 ID        /// </summary>
+        /// 交易 ID
+        /// </summary>
         public string order_bn { get; set; }
 
         /// <summary>
-        /// 是否保价        可选值:true 保价，false 不保价        /// </summary>
+        /// 是否保价        可选值:true 保价，false 不保价
+        /// </summary>
         public bool is_protect { get; set; }
 
         /// <summary>
-        /// 是否货到付款        /// </summary>
+        /// 是否货到付款
+        /// </summary>
         public bool is_cod { get; set; }
 
         /// <summary>
-        /// 买家（会员）ID        /// </summary>
+        /// 买家（会员）ID
+        /// </summary>
         public string buyer_id { get; set; }
 
         /// <summary>
@@ -124,6 +137,7 @@ namespace Prism.Domain
         /// </summary>
         public string memo { get; set; }
 
+        [JsonFormat(typeof(ReshipItem))]
         public ReshipItemWrap items { get; set; }
     }
 
@@ -135,7 +149,8 @@ namespace Prism.Domain
     public class ReshipItem
     {
         /// <summary>
-        /// 货品类型  可 选 值 :product(货 品),gift(赠品),adjunct(配件),pkg(捆绑)        /// </summary>
+        /// 货品类型  可 选 值 :product(货 品),gift(赠品),adjunct(配件),pkg(捆绑)
+        /// </summary>
         public string item_type { get; set; }
 
         /// <summary>
