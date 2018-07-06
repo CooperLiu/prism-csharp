@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Prism.Extensions
 {
-    public static class NameValueCollectionExtensions
+     static class NameValueCollectionExtensions
     {
         /// <summary>
         /// 将有序字典转换为字符连接串（a=1 & b=2 & c=3）

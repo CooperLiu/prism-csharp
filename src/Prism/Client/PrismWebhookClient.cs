@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Prism.Domain;
 using Prism.Extensions;
 using Prism.Logging;
 
@@ -26,23 +24,18 @@ namespace Prism.Client
             ClientSecret = clientSecret;
         }
 
-        //public async Task<TCallbackResponse> Handle<TCallbackResponse>(
-        //    NameValueCollection @params,
-        //    string httpMethod,
-        //    string apiAbsolutePath,
-        //    string apiMethod
-        //    )
-        //{
-        //    return null;
-        //}
-
-        public async Task<TCallbackResponse> Handle<TCallbackRequest, TCallbackResponse>(
+        public async Task<TCallbackResponse> Handle<TCallbackRequest, TCallbackRequestData, TCallbackResponse>(
             TCallbackRequest request,
-            string httpMethod,
-            string apiAbsolutePath,
-            string apiMethod,
-            Func<TCallbackRequest, Task<TCallbackResponse>> handlerFunc)
+            Func<TCallbackRequest, Task<TCallbackResponse>> handlerFunc,
+            IEnumerable<KeyValuePair<string, string>> requestHeaders = null)
+            where TCallbackRequest : PrismWebhookRequestBase<TCallbackRequestData, TCallbackResponse>
+            where TCallbackRequestData : class, new()
         {
+            //验签
+
+
+
+
             return await handlerFunc(request);
         }
     }

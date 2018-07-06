@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Text;
 using System.Web;
 
@@ -8,8 +9,7 @@ namespace Prism.Client
 {
     public class PrismParams : NameValueCollection
     {
-
-        public override string ToString()
+        public string ToQueryString()
         {
             List<string> items = new List<string>();
 
@@ -22,7 +22,7 @@ namespace Prism.Client
 
         public byte[] ToBytes()
         {
-            string str = this.ToString();
+            string str = this.ToQueryString();
             return Encoding.ASCII.GetBytes(str);
         }
 
@@ -66,7 +66,7 @@ namespace Prism.Client
             return String.Join("&", items.ToArray());
         }
 
-        static public string Encode(string s)
+        public static string Encode(string s)
         {
             if (string.IsNullOrEmpty(s))
             {
@@ -88,6 +88,22 @@ namespace Prism.Client
                 }
             }
             return new string(temp);
+        }
+
+        public PrismParams GetFromUri(Uri uri)
+        {
+            var queryString = uri.Query.Replace("?", "");
+            var queryStringNameValues = queryString.Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var item in queryStringNameValues)
+            {
+                var nameValue = item.Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
+                if (nameValue.Any() && nameValue.Length == 2)
+                {
+                    Add(nameValue[0], nameValue[1]);
+                }
+            }
+
+            return this;
         }
     }
 }

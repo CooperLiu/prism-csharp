@@ -225,7 +225,7 @@ namespace UnitTestPrism
 
             var nv = NameValueConvertor.Convert(q);
 
-            var str = nv.ToQueryString();
+            var str = NameValueCollectionExtensions.ToQueryString(nv);
 
             Assert.IsNotNull(nv);
 
@@ -486,10 +486,10 @@ namespace UnitTestPrism
             string secret = "2ipua2a6jwslp6cq6fna";
             var client = new PrismWebhookClient(host, key, secret);
 
-            var res = await client.Handle(request, "POST", "api/Eshop", method, (data) =>
-            {
-                return Task.FromResult(data.Response);
-            });
+            //var res = await client.Handle(request, "POST", "api/Eshop", method, (data) =>
+            //{
+            //    return Task.FromResult(data.Response);
+            //});
         }
 
     }

@@ -70,33 +70,20 @@ namespace Prism.Client
                 }
             }
 
-
-            var getParams = new PrismParams();
             var uri = new Uri(requestUrl);
 
-            var queryString = uri.Query.Replace("?", "");
-            var queryStringNameValues = queryString.Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var item in queryStringNameValues)
-            {
-                var nameValue = item.Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
-                if (nameValue.Any() && nameValue.Length == 2)
-                {
-                    getParams.Add(nameValue[0], nameValue[1]);
-                }
-            }
-
-            // var postParams = NameValueConvertor.Convert(postParams);
-
+            var getParams = new PrismParams();
+            getParams.GetFromUri(uri);
 
             var signParameters = method == HttpMethod.Get || method == HttpMethod.Delete ? getParams : postParams;
             signParameters.Add("client_id", this.ClientId);
             signParameters.Add("sign_time", GetUnixTimestamp().ToString());
 
-            signParameters.Add("sign", GetSign(httpMethod, uri.AbsolutePath, hearderParams, getParams, signParameters));
+            signParameters.Add("sign", PrismSignProvider.GetSign(httpMethod, uri.AbsolutePath, this.ClientSecret, hearderParams, getParams, signParameters));
 
             if (method == HttpMethod.Get)
             {
-                requestUrl = requestUrl + signParameters.ToString();
+                requestUrl = requestUrl + signParameters.ToQueryString();
             }
 
             var data = signParameters.ToQueryString();
@@ -168,30 +155,6 @@ namespace Prism.Client
             }
         }
 
-
-        private string GetSign(string method, string path, PrismParams headers, PrismParams getParams, PrismParams postParams)
-        {
-            var items = new List<string>();
-            items.Add(this.ClientSecret);
-            items.Add(method);
-            items.Add(PrismParams.Encode(path));
-            items.Add(PrismParams.Encode(headers.headers_str()));
-            items.Add(PrismParams.Encode(getParams.sort_join("sign")));
-            items.Add(PrismParams.Encode(postParams.sort_join("sign")));
-            items.Add(this.ClientSecret);
-            string signstr = String.Join("&", items.ToArray());
-
-            Logger.Info($"Prism Signed Str:{signstr}");
-
-            MD5 md5Hash = MD5.Create();
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(signstr));
-            StringBuilder sBuilder = new StringBuilder();
-            for (int i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString("X2"));
-            }
-            return sBuilder.ToString();
-        }
 
         private HttpMethod GetHttpMethodMapping(string httpMethod)
         {

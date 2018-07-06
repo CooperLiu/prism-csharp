@@ -10,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DFA48E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism", "src\Prism.csproj", "{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestPrism", "src\UnitTestPrism\UnitTestPrism.csproj", "{E9F6890E-DEB7-4E46-9B31-D4316E187269}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism", "src\Prism\Prism.csproj", "{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,14 +20,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9F6890E-DEB7-4E46-9B31-D4316E187269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E9F6890E-DEB7-4E46-9B31-D4316E187269}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9F6890E-DEB7-4E46-9B31-D4316E187269}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9F6890E-DEB7-4E46-9B31-D4316E187269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
