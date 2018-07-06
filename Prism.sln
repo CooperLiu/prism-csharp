@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestPrism", "src\UnitTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism", "src\Prism\Prism.csproj", "{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C1472AEC-A923-40DA-8748-98DA002BA4BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWebHost", "src\PrismWebHost\PrismWebHost.csproj", "{BF42311E-96B1-4CFA-BFD7-AFAA9A743E3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,9 +32,17 @@ Global
 		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93D2D3F2-CC3F-42FE-A970-3AAD8C015982}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF42311E-96B1-4CFA-BFD7-AFAA9A743E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF42311E-96B1-4CFA-BFD7-AFAA9A743E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF42311E-96B1-4CFA-BFD7-AFAA9A743E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF42311E-96B1-4CFA-BFD7-AFAA9A743E3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E9F6890E-DEB7-4E46-9B31-D4316E187269} = {C1472AEC-A923-40DA-8748-98DA002BA4BA}
+		{BF42311E-96B1-4CFA-BFD7-AFAA9A743E3C} = {C1472AEC-A923-40DA-8748-98DA002BA4BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7DF2C85D-BB97-4B9E-9617-41C77A5F72CC}

@@ -90,7 +90,7 @@ namespace UnitTestPrism
             t.receiver_time = "无";
             t.buyer_alipay_no = "alipayNo";
             t.buyer_id = "1213131313";
-            t.buyer_uname = "Unknown";
+            t.buyer_uname = "Cooperliu";
             t.buyer_name = "刘先生";
             t.buyer_mobile = "13688886666";
             t.buyer_phone = "";
