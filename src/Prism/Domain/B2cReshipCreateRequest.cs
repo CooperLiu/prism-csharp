@@ -138,13 +138,13 @@ namespace Prism.Domain
         public string memo { get; set; }
 
         [JsonFormat(typeof(ReshipItem))]
-        public ReshipItemWrap items { get; set; }
+        public List<ReshipItem> items { get; set; }
     }
 
-    public class ReshipItemWrap
-    {
-        public List<ReshipItem> ReshipItem { get; set; }
-    }
+    //public class ReshipItemWrap
+    //{
+    //    public List<ReshipItem> ReshipItem { get; set; }
+    //}
 
     public class ReshipItem
     {

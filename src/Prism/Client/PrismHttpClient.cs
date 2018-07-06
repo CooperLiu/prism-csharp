@@ -41,7 +41,7 @@ namespace Prism.Client
             IEnumerable<KeyValuePair<string, string>> headers = null
             ) where TRequestData : class, new()
         {
-            var postParams = NameValueConvertor.Convert(request.Data);
+            var postParams = NameValueConvertor.MapFrom(request.Data);
 
             return await Execute<TResponseData>(request.HttpMethod, request.ApiAbsolutePath, request.ApiMethod, postParams, headers);
 
@@ -77,7 +77,7 @@ namespace Prism.Client
 
             var signParameters = method == HttpMethod.Get || method == HttpMethod.Delete ? getParams : postParams;
             signParameters.Add("client_id", this.ClientId);
-            signParameters.Add("sign_time", GetUnixTimestamp().ToString());
+            signParameters.Add("sign_time", DateTimeExtensions.GetUnixTimestamp().ToString());
 
             signParameters.Add("sign", PrismSignProvider.GetSign(httpMethod, uri.AbsolutePath, this.ClientSecret, hearderParams, getParams, signParameters));
 
@@ -167,11 +167,6 @@ namespace Prism.Client
                 default:
                     throw new NotSupportedException();
             }
-        }
-
-        private Int32 GetUnixTimestamp()
-        {
-            return (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         }
 
     }

@@ -24,7 +24,7 @@ namespace Prism.Domain
         /// <summary>
         /// 发货单号
         /// </summary>
-        public int delivery_bn { get; set; }
+        public string delivery_bn { get; set; }
 
         /// <summary>
         /// 交易 ID
@@ -140,16 +140,16 @@ namespace Prism.Domain
         /// 发货单明细
         /// </summary>
         [JsonFormat(typeof(ShippingItem))]
-        public ShippingItemWrap items { get; set; }
+        public List<ShippingItem> items { get; set; }
     }
 
-    public class ShippingItemWrap
-    {
-        /// <summary>
-        /// 发货单明细
-        /// </summary>
-        public List<ShippingItem> ShippingItem { get; set; }
-    }
+    //public class ShippingItemWrap
+    //{
+    //    /// <summary>
+    //    /// 发货单明细
+    //    /// </summary>
+    //    public List<ShippingItem> ShippingItem { get; set; }
+    //}
 
     public class ShippingItem
     {

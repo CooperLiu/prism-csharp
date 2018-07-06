@@ -4,12 +4,13 @@ using System.Collections.Specialized;
 using System.Linq;
 using Newtonsoft.Json;
 using Prism.Client;
+using Prism.Extensions;
 
 namespace Prism
 {
     public static class NameValueConvertor
     {
-        public static PrismParams Convert<TRequest>(TRequest request, string timeFormat = "yyyy-MM-dd HH:mm:ss", JsonSerializerSettings settings = null)
+        public static PrismParams MapFrom<TRequest>(TRequest request, string timeFormat = "yyyy-MM-dd HH:mm:ss", JsonSerializerSettings settings = null)
         {
             var type = typeof(TRequest);
 
@@ -58,7 +59,7 @@ namespace Prism
 
                 var name = p.Name;
 
-                var value = requestData[name];
+                var value = requestData[name]?.UrlDecode();
 
                 var pt = p.PropertyType;
 
@@ -67,11 +68,10 @@ namespace Prism
 
                     if (pt == typeof(DateTime?))
                     {
-                        var v = DateTime.ParseExact(value, timeFormat, null);
+                        var v = Convert.ToInt32(value).GetDateTimeFromUnixTimeStamp(); //DateTime.ParseExact(value, timeFormat, null);
                         p.SetValue(obj, v);
                     }
-
-                    if (jsonAttribute != null)
+                    else if (jsonAttribute != null)
                     {
                         var attr = (JsonFormatAttribute)jsonAttribute;
 
@@ -80,7 +80,7 @@ namespace Prism
                             var list = JsonConvert.DeserializeObject(value, pt);
                             p.SetValue(obj, list);
                         }
-                      
+
                     }
                     else
                     {

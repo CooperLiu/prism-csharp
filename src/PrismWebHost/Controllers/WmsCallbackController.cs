@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using Prism;
+using Prism.Domain;
 
 namespace PrismWebHost.Controllers
 {
@@ -17,8 +19,15 @@ namespace PrismWebHost.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("api/Eshop")]
-        public async Task<dynamic> Eshop(string input)
+        public async Task<dynamic> Eshop()
         {
+
+            var request = await Request.Content.ReadAsStringAsync();
+
+            var nv = await Request.Content.ReadAsFormDataAsync();
+
+            var data = NameValueConvertor.MapTo<B2cDeliveryCreateRequestData>(nv);
+
             await Task.CompletedTask;
 
             return new

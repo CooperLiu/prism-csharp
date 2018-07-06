@@ -187,7 +187,7 @@ namespace UnitTestPrism
 
             t.payment_lists = new PaymentInfoWrap() { payment_list = new List<PaymentInfo>() { p } };
 
-            var nv = NameValueConvertor.Convert(t);
+            var nv = NameValueConvertor.MapFrom(t);
 
             #endregion
 
@@ -223,7 +223,7 @@ namespace UnitTestPrism
 
             q.DataItems = new List<RequestDataItem>() { i };
 
-            var nv = NameValueConvertor.Convert(q);
+            var nv = NameValueConvertor.MapFrom(q);
 
             var str = NameValueCollectionExtensions.ToQueryString(nv);
 
@@ -385,7 +385,7 @@ namespace UnitTestPrism
 
             t.payment_lists = new PaymentInfoWrap() { payment_list = new List<PaymentInfo>() { p } };
 
-            var nv = NameValueConvertor.Convert(t);
+            var nv = NameValueConvertor.MapFrom(t);
 
             #endregion
 
@@ -478,7 +478,7 @@ namespace UnitTestPrism
             };
 
 
-            var nv = NameValueConvertor.Convert(request.Data);
+            var nv = NameValueConvertor.MapFrom(request.Data);
 
 
             string host = "http://ximslkp4.apihub.cn";

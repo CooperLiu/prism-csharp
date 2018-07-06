@@ -75,7 +75,7 @@ namespace Prism.Domain
         /// 售后申请明细
         /// </summary>
         [JsonFormat(typeof(AfterSaleItemInfo))]
-        public AfterSaleItemWrap return_product_items { get; set; }
+        public List<AfterSaleItemInfo> return_product_items { get; set; }
 
         /// <summary>
         /// 附件（通常为 url）
@@ -85,10 +85,10 @@ namespace Prism.Domain
 
     }
 
-    public class AfterSaleItemWrap
-    {
-        public List<AfterSaleItemInfo> AfterSaleItem { get; set; }
-    }
+    //public class AfterSaleItemWrap
+    //{
+    //    public List<AfterSaleItemInfo> AfterSaleItem { get; set; }
+    //}
 
     public class AfterSaleItemInfo
     {

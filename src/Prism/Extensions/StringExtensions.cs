@@ -121,6 +121,11 @@ namespace Prism.Extensions
             return str;
         }
 
+        public static string UrlDecode(this string sourceStr)
+        {
+            return System.Net.WebUtility.UrlDecode(sourceStr);
+        }
+
         /// <summary>
         /// 字符串Unicode解码
         /// </summary>

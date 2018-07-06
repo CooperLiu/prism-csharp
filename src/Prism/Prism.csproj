@@ -100,6 +100,7 @@
     <Compile Include="Domain\StoreTradeRefundRequest.cs" />
     <Compile Include="Domain\StoreTradeAddRequest.cs" />
     <Compile Include="Domain\StoreTradeUpdateRequest.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
