@@ -68,8 +68,17 @@ namespace Prism
 
                     if (pt == typeof(DateTime?))
                     {
-                        var v = Convert.ToInt32(value).GetDateTimeFromUnixTimeStamp(); //DateTime.ParseExact(value, timeFormat, null);
-                        p.SetValue(obj, v);
+                        if (int.TryParse(value, out int unixTimestamp))
+                        {
+                            var v = unixTimestamp.GetDateTimeFromUnixTimeStamp();
+                            p.SetValue(obj, v);
+                        }
+                        else
+                        {
+                            DateTime.ParseExact(value, timeFormat, null);
+                        }
+
+
                     }
                     else if (jsonAttribute != null)
                     {

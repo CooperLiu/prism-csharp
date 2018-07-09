@@ -9,6 +9,11 @@ namespace Prism.Domain
     /// </summary>
     public class StoreTradeAddRequest : PrismRequestBase<StoreTradeAddRequestData, object>
     {
+        public StoreTradeAddRequest(StoreTradeAddRequestData data)
+            : base(data)
+        {
+        }
+
         public override string ApiMethod { get; set; } = "store.trade.add";
     }
 

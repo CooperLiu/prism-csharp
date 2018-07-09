@@ -22,9 +22,32 @@ namespace PrismWebHost.Controllers
         public async Task<dynamic> Eshop()
         {
 
-            var request = await Request.Content.ReadAsStringAsync();
-
             var nv = await Request.Content.ReadAsFormDataAsync();
+
+            var method = nv["method"];
+
+            switch (method.ToLower())
+            {
+                case PrismB2cWebhookMethods.B2cDeliveryCreateRequestMethod:
+                    //业务逻辑处理
+                    break;
+                case PrismB2cWebhookMethods.B2cDeliveryUpdateRequestMethod:
+                    var updatedData = NameValueConvertor.MapTo<B2cDeliveryUpdateRequestData>(nv);
+
+                    var request = new B2cDeliveryUpdateRequest();
+
+                    request.Data = updatedData;
+
+                    //验签
+                    //业务逻辑处理
+                    var responseData = new B2cDeliveryUpdateResponseData();
+                    //包装响应体
+                    break;
+                case PrismB2cWebhookMethods.B2cReshipCreateRequestMethod:
+                    break;
+                default:
+                    break;
+            }
 
             var data = NameValueConvertor.MapTo<B2cDeliveryCreateRequestData>(nv);
 

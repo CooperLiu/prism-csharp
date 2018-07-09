@@ -7,7 +7,7 @@ namespace Prism.Domain
     /// </summary>
     public class B2cOrderShipStatusUpdateRequest : PrismWebhookRequestBase<B2cOrderShipStatusUpdateRequestData, B2cOrderShipStatusUpdateResponseData>
     {
-        public override string ApiMethod { get; set; } = "b2c.order.ship_status_updat";
+        public override string ApiMethod { get; set; } = PrismB2cWebhookMethods.B2cOrderShipStatusUpdateRequestMethod;
     }
 
     /// <summary>

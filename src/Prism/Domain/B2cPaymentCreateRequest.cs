@@ -7,7 +7,7 @@ namespace Prism.Domain
     /// </summary>
     public class B2cPaymentCreateRequest : PrismWebhookRequestBase<B2cPaymentCreateRequestData, B2cPaymentCreateResponseData>
     {
-        public override string ApiMethod { get; set; } = "b2c.payment.create";
+        public override string ApiMethod { get; set; } = PrismB2cWebhookMethods.B2cPaymentCreateRequestMethod;
     }
 
     /// <summary>

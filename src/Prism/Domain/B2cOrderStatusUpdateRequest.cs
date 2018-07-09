@@ -6,7 +6,7 @@
     /// </summary>
     public class B2cOrderStatusUpdateRequest : PrismWebhookRequestBase<B2cOrderStatusUpdateRequestData, B2cOrderStatusUpdateResponseData>
     {
-        public override string ApiMethod { get; set; } = "b2c.order.status_update";
+        public override string ApiMethod { get; set; } = PrismB2cWebhookMethods.B2cOrderStatusUpdateRequestMethod;
     }
 
     /// <summary>

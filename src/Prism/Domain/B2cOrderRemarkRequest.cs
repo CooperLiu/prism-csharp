@@ -13,7 +13,7 @@ namespace Prism.Domain
     /// </summary>
     public class B2cOrderRemarkRequest : PrismWebhookRequestBase<B2cOrderRemarkRequestData, B2cOrderRemarkResponseData>
     {
-        public override string ApiMethod { get; set; } = "b2c.order.remark";
+        public override string ApiMethod { get; set; } = PrismB2cWebhookMethods.B2cOrderRemarkRequestMethod;
     }
 
     /// <summary>

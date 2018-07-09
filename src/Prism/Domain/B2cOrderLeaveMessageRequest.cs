@@ -12,7 +12,7 @@ namespace Prism.Domain
     /// </summary>
     public class B2cOrderLeaveMessageRequest : PrismWebhookRequestBase<B2cOrderLeaveMessageRequestData, B2cOrderLeaveMessageResponseData>
     {
-        public override string ApiMethod { get; set; } = "b2c.order.leave_message";
+        public override string ApiMethod { get; set; } = PrismB2cWebhookMethods.B2cOrderLeaveMessageRequestMethod;
     }
     /// <summary>
     /// b2c.order.leave_message 添加买家留言

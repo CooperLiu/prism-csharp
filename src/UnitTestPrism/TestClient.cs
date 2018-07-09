@@ -389,8 +389,7 @@ namespace UnitTestPrism
 
             #endregion
 
-            var request = new StoreTradeAddRequest();
-            request.Data = t;
+            var request = new StoreTradeAddRequest(t);
 
             string host = "http://ximslkp4.apihub.cn";
             string key = "quxabf4t";

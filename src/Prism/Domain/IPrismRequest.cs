@@ -24,7 +24,12 @@
         public virtual string HttpMethod { get; set; } = "POST";
         public virtual string ApiAbsolutePath { get; set; } = "api/oms";
         public virtual string ApiMethod { get; set; }
-        public virtual TRequestData Data { get; set; }
+        public TRequestData Data { get; set; }
+
+        public PrismRequestBase(TRequestData data)
+        {
+            Data = data;
+        }
     }
 
     /// <summary>

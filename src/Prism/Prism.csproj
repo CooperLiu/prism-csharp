@@ -93,6 +93,7 @@
     <Compile Include="Domain\B2cReshipCreateRequest.cs" />
     <Compile Include="Domain\EctoolsGetPaymentsGetAllRequest.cs" />
     <Compile Include="Domain\IPrismRequest.cs" />
+    <Compile Include="Domain\PrismB2cWebhookMethods.cs" />
     <Compile Include="Domain\StoreTradeAftersaleAddRequest.cs" />
     <Compile Include="Domain\B2cDeliveryCreateRequest.cs" />
     <Compile Include="Domain\B2cDeliveryUpdateRequest.cs" />

@@ -8,7 +8,7 @@ namespace Prism.Domain
     /// </summary>
     public class B2cRefundCreateRequest : PrismWebhookRequestBase<B2cRefundCreateRequestData, B2cRefundCreateResponseData>
     {
-        public override string ApiMethod { get; set; } = "b2c.refund.create";
+        public override string ApiMethod { get; set; } = PrismB2cWebhookMethods.B2cRefundCreateRequestMethod;
     }
 
     /// <summary>

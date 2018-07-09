@@ -9,7 +9,7 @@ namespace Prism.Domain
     /// </summary>
     public class B2cReshipCreateRequest : PrismWebhookRequestBase<B2cReshipCreateRequestData, B2cReshipCreateResponseData>
     {
-        public override string ApiMethod { get; set; } = "b2c.reship.create";
+        public override string ApiMethod { get; set; } = PrismB2cWebhookMethods.B2cReshipCreateRequestMethod;
     }
 
     /// <summary>

@@ -5,9 +5,9 @@ namespace Prism.Domain
     /// <summary>
     /// b2c.aftersale.update 更新售后申请的状态
     /// </summary>
-    public class B2cAftersaleUpdateRequest:PrismWebhookRequestBase<B2cAftersaleUpdateRequestData, B2cAftersaleUpdateResponseData>
+    public class B2cAftersaleUpdateRequest : PrismWebhookRequestBase<B2cAftersaleUpdateRequestData, B2cAftersaleUpdateResponseData>
     {
-        public override string ApiMethod { get; set; } = "b2c.aftersale.update";
+        public override string ApiMethod { get; set; } = PrismB2cWebhookMethods.B2cAftersaleUpdateRequestMethod;
     }
 
     /// <summary>

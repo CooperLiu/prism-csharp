@@ -5,6 +5,11 @@
     /// </summary>
     public class StoreTradeUpdateRequest : PrismRequestBase<StoreTradeUpdateRequestData, object>
     {
+        public StoreTradeUpdateRequest(StoreTradeUpdateRequestData data) 
+            : base(data)
+        {
+        }
+
         public override string ApiMethod { get; set; } = "store.trade.update";
     }
 
