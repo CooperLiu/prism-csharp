@@ -7,6 +7,15 @@ namespace Prism.Domain
         public string tid { get; set; }
     }
 
+    public class PrismWebhookResponse<TResponseData> where TResponseData : class
+    {
+        public string res { get; set; } = "";
+
+        public string rsp { get; set; } = "succ";
+
+        public TResponseData data { get; set; }
+    }
+
     /// <summary>
     /// 创建订单store.trade.add 
     /// </summary>

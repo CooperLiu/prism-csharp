@@ -58,7 +58,7 @@ namespace Prism.Client
         {
             var requestUrl = ApiGateway + apiAbsolutePath + "?method=" + apiMethod;
 
-            var method = GetHttpMethodMapping(httpMethod);
+            var method = HttpMethodMapping.Map(httpMethod);
 
 
             var hearderParams = new PrismParams();
@@ -154,18 +154,6 @@ namespace Prism.Client
         }
 
 
-        private HttpMethod GetHttpMethodMapping(string httpMethod)
-        {
-            switch (httpMethod.ToUpper())
-            {
-                case "GET": return HttpMethod.Get;
-                case "POST": return HttpMethod.Post;
-                case "PUT": return HttpMethod.Put;
-                case "DELETE": return HttpMethod.Delete;
-                default:
-                    throw new NotSupportedException();
-            }
-        }
 
     }
 }

@@ -467,7 +467,7 @@ namespace UnitTestPrism
         }
 
         [TestMethod]
-        public async Task Test_Webhooks()
+        public void Test_Webhooks()
         {
             var method = "ectools.get_payments.get_all";
             var request = new EctoolsGetPaymentsGetAllRequest();

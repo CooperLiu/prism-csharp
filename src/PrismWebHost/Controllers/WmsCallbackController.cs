@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using Prism;
+using Prism.Client;
 using Prism.Domain;
+using Prism.Extensions;
 
 namespace PrismWebHost.Controllers
 {
     public class WmsCallbackController : ApiController
     {
+
         /// <summary>
         /// 商派回调测试
         /// </summary>
@@ -20,10 +23,19 @@ namespace PrismWebHost.Controllers
         [Route("api/Eshop")]
         public async Task<dynamic> Eshop()
         {
+            var callbackApi = "";
+            var clientId = "quxabf4t";
+            var clientSecret = "2ipua2a6jwslp6cq6fna";
+            var client = new PrismWebhookClient(callbackApi, clientId, clientSecret);
 
             var nv = await Request.Content.ReadAsFormDataAsync();
 
             var method = nv["method"];
+            var sign = nv["sign"];
+
+            var dateStr = nv["date"];
+
+            var date = DateTime.Parse(dateStr);
 
             switch (method.ToLower())
             {
@@ -31,24 +43,26 @@ namespace PrismWebHost.Controllers
                     //业务逻辑处理
                     break;
                 case PrismB2cWebhookMethods.B2cDeliveryUpdateRequestMethod:
-                    var updatedData = NameValueConvertor.MapTo<B2cDeliveryUpdateRequestData>(nv);
-
                     var request = new B2cDeliveryUpdateRequest();
+                    request.Data = NameValueConvertor.MapTo<B2cDeliveryUpdateRequestData>(nv);
+                    request.Sign = sign;
+                    request.Date = date;
 
-                    request.Data = updatedData;
-
-                    //验签
+                    var res = await client.Handle<B2cDeliveryUpdateRequest, B2cDeliveryUpdateRequestData, B2cDeliveryUpdateResponseData>(request,
+                       () => Task.FromResult(new B2cDeliveryUpdateResponseData()
+                       {
+                           delivery_id = request.Data.delivery_bn,
+                           tid = request.Data.order_bn
+                       }));
                     //业务逻辑处理
-                    var responseData = new B2cDeliveryUpdateResponseData();
                     //包装响应体
-                    break;
+                    return new PrismWebhookResponse<B2cDeliveryUpdateResponseData>() { data= res };
+
                 case PrismB2cWebhookMethods.B2cReshipCreateRequestMethod:
                     break;
                 default:
                     break;
             }
-
-            await Task.CompletedTask;
 
             return new
             {

@@ -8,7 +8,7 @@ using Prism.Extensions;
 
 namespace Prism
 {
-    public static class NameValueConvertor
+    static class NameValueConvertor
     {
         public static PrismParams MapFrom<TRequest>(TRequest request, string timeFormat = "yyyy-MM-dd HH:mm:ss", JsonSerializerSettings settings = null)
         {
@@ -75,7 +75,8 @@ namespace Prism
                         }
                         else
                         {
-                            DateTime.ParseExact(value, timeFormat, null);
+                            var v = DateTime.ParseExact(value, timeFormat, null);
+                            p.SetValue(obj, v);
                         }
 
 

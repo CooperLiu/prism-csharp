@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Prism.Extensions
 {
-    internal static class StringExtensions
+    public static class StringExtensions
     {
         public static bool IsNullOrEmpty(this string str)
         {

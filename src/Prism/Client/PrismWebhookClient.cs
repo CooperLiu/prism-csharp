@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Prism.Domain;
 using Prism.Extensions;
@@ -26,14 +27,40 @@ namespace Prism.Client
 
         public async Task<TCallbackResponse> Handle<TCallbackRequest, TCallbackRequestData, TCallbackResponse>(
             TCallbackRequest request,
-            Func<TCallbackRequest, Task<TCallbackResponse>> handlerFunc,
+            Func<Task<TCallbackResponse>> handlerFunc,
             IEnumerable<KeyValuePair<string, string>> requestHeaders = null)
             where TCallbackRequest : PrismWebhookRequestBase<TCallbackRequestData, TCallbackResponse>
             where TCallbackRequestData : class, new()
         {
             //验签
+            //var hearderParams = new PrismParams();
+            //if (requestHeaders != null)
+            //{
+            //    foreach (var item in requestHeaders)
+            //    {
+            //        hearderParams.Add(item.Key, item.Value);
+            //    }
+            //}
 
-            return await handlerFunc(request);
+            //var method = HttpMethodMapping.Map(request.HttpMethod);
+
+            //var getParams = new PrismParams();
+
+            //var postParams = NameValueConvertor.MapFrom(request.Data);
+
+            //var signParameters = method == HttpMethod.Get || method == HttpMethod.Delete ? getParams : postParams;
+            //signParameters.Add("client_id", this.ClientId);
+            //signParameters.Add("sign_time", request.Date.ToUnixTimestamp().ToString());
+
+            //var verifiedSign = PrismSignProvider.GetSign(request.HttpMethod, request.ApiAbsolutePath, this.ClientSecret, hearderParams,
+            //    getParams, signParameters);
+
+            //if (verifiedSign.Equals(request.Sign, StringComparison.OrdinalIgnoreCase))
+            //{
+            //    Logger.Debug($"Prism Webhook Sign Error");
+            //}
+
+            return await handlerFunc();
         }
     }
 }
