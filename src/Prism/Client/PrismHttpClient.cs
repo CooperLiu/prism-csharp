@@ -29,6 +29,7 @@ namespace Prism.Client
 
         public int Timeout { get; set; } = 60 * 5;
 
+
         public PrismHttpClient(string apiGateway, string clientId, string clientSecret)
         {
             ApiGateway = apiGateway.EnsureEndsWith('/');
@@ -59,7 +60,6 @@ namespace Prism.Client
 
             var method = GetHttpMethodMapping(httpMethod);
 
-            var secret = this.ClientSecret;
 
             var hearderParams = new PrismParams();
             if (requestHeaders != null)
@@ -85,8 +85,6 @@ namespace Prism.Client
             {
                 requestUrl = requestUrl + signParameters.ToQueryString();
             }
-
-            var data = signParameters.ToQueryString();
 
             Logger.Debug($"Prism SDK: Request Url:{requestUrl},Params:{signParameters.ToQueryString()}");
 

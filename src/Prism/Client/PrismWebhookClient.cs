@@ -33,9 +33,6 @@ namespace Prism.Client
         {
             //验签
 
-
-
-
             return await handlerFunc(request);
         }
     }

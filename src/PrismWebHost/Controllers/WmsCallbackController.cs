@@ -15,7 +15,6 @@ namespace PrismWebHost.Controllers
         /// <summary>
         /// 商派回调测试
         /// </summary>
-        /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("api/Eshop")]
@@ -48,8 +47,6 @@ namespace PrismWebHost.Controllers
                 default:
                     break;
             }
-
-            var data = NameValueConvertor.MapTo<B2cDeliveryCreateRequestData>(nv);
 
             await Task.CompletedTask;
 
