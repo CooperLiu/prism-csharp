@@ -16,10 +16,11 @@ namespace Prism.Client
 {
     public class PrismHttpClient
     {
-
         private static readonly ILog Logger = LogProvider.For<PrismHttpClient>();
 
         private static readonly HttpClient _httpClient = new HttpClient(new HttpClientHandler() { UseCookies = false });
+
+        private readonly HttpClient _apiCaller;
 
         public string ClientId { get; set; }
 
@@ -29,12 +30,18 @@ namespace Prism.Client
 
         public int Timeout { get; set; } = 60 * 5;
 
+        public PrismHttpClient(HttpClient httpClient)
+        {
+            _apiCaller = httpClient;
+        }
 
-        public PrismHttpClient(string apiGateway, string clientId, string clientSecret)
+        public PrismHttpClient(string apiGateway, string clientId, string clientSecret, HttpClient apiCaller = null)
         {
             ApiGateway = apiGateway.EnsureEndsWith('/');
             ClientId = clientId;
             ClientSecret = clientSecret;
+
+            _apiCaller = apiCaller ?? _httpClient;
         }
 
         public async Task<PrismHttpResponse<TResponseData>> Execute<TResponseData, TRequestData>(
@@ -100,7 +107,7 @@ namespace Prism.Client
 
                 var cannelToken = new CancellationTokenSource(TimeSpan.FromSeconds(this.Timeout));
 
-                var response = await _httpClient.SendAsync(msg, cannelToken.Token);
+                var response = await _apiCaller.SendAsync(msg, cannelToken.Token);
                 var resMsg = await response.Content.ReadAsStringAsync();
 
                 Logger.Debug($"Prism SDK: response:{resMsg}");

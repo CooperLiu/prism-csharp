@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Prism")]
+[assembly: AssemblyTitle("PrismSdk")]
 [assembly: AssemblyDescription("Prism SDK")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("shopex")]
-[assembly: AssemblyProduct("Prism")]
-[assembly: AssemblyCopyright("Copyright shopex © 2014")]
+[assembly: AssemblyProduct("PrismSdk")]
+[assembly: AssemblyCopyright("Copyright cooperliu © 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: InternalsVisibleTo("UnitTestPrism")]
@@ -34,5 +34,5 @@ using System.Runtime.InteropServices;
 // 可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”: 
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.2")]
-[assembly: AssemblyFileVersion("1.0.2")]
+[assembly: AssemblyVersion("1.0.3")]
+[assembly: AssemblyFileVersion("1.0.3")]
